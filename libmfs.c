@@ -80,6 +80,24 @@ int MFS_Read(int inum, char *buffer, int offset, int nbytes) {
 }
 
 int MFS_Creat(int pinum, int type, char *name) {
+    if(connectionEstablished){
+        message_t m,res_m;
+        m.mtype = MFS_CRET;
+        m.inodeNum = pinum;
+        m.fileType = type;
+        m.path = name;
+        while(true){
+            res_m= sendMessageToServer(m);
+            if(!res_m.retry)
+                break;
+            else{
+                printf("Retrying MFS_Creat\n");
+            }
+        }
+    }
+    else{
+        return -1;
+    }
     return 0;
 }
 

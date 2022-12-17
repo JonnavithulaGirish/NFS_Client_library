@@ -31,5 +31,12 @@ typedef struct {
     int data_region_len;   // in blocks
 } super_t;
 
+typedef struct {
+	unsigned int bits[UFS_BLOCK_SIZE / sizeof(unsigned int)];
+} bitmap_t;
+
+typedef struct {
+	dir_ent_t dirEntries[UFS_BLOCK_SIZE / sizeof(dir_ent_t)];
+} dir_block_t;
 
 #endif // __ufs_h__

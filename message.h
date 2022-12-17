@@ -23,6 +23,7 @@ typedef struct {
     char *buffer;
     int offset;
     int nbytes;
+    int fileType;
     bool retry;
 } message_t;
 
