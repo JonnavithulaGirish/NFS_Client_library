@@ -13,7 +13,7 @@ bool connectionEstablished;
 
 
 int createUdpConnection(char* hostname, int port){
-    sd = UDP_Open(20000);
+    sd = UDP_Open(30000);
     rc = UDP_FillSockAddr(&addrSnd, hostname, port);
     assert(sd>0 && rc>=0);
     connectionEstablished= true;
@@ -22,6 +22,8 @@ int createUdpConnection(char* hostname, int port){
 
 message_t sendMessageToServer(message_t m){
     printf("client:: send message %d\n", m.mtype);
+    if(m.path != NULL)
+        printf("client data :%s\n", m.path);
     rc = UDP_Write(sd, &addrSnd, (char *) &m, sizeof(message_t));
     if (rc < 0) {
 	    printf("client:: failed to send\n");
@@ -68,6 +70,26 @@ int MFS_Lookup(int pinum, char *name) {
 }
 
 int MFS_Stat(int inum, MFS_Stat_t *m) {
+    if(connectionEstablished){
+        message_t message,res_m;
+        message.mtype = MFS_STAT;
+        message.inodeNum = inum;
+        while(true){
+            res_m= sendMessageToServer(message);
+            if(!res_m.retry)
+                break;
+            else{
+                printf("Retrying MFS_Stat\n");
+            }
+        }
+        m->size = res_m.fStats.size;
+        m->type = res_m.fStats.type;
+        assert(res_m.rc==1);
+        printf("client:: got MFS_Stat [size:%d type:%d]\n", m->size, m->type);
+    }
+    else{
+        return -1;
+    }
     return 0;
 }
 
@@ -85,7 +107,8 @@ int MFS_Creat(int pinum, int type, char *name) {
         m.mtype = MFS_CRET;
         m.inodeNum = pinum;
         m.fileType = type;
-        m.path = name;
+        strcpy(m.path, name);
+        printf("client:: sending path %s------------\n",m.path);
         while(true){
             res_m= sendMessageToServer(m);
             if(!res_m.retry)
