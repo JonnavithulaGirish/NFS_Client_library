@@ -7,7 +7,7 @@
 // client code
 int main(int argc, char *argv[]) {
     // return 0;
-    int x= MFS_Init("localhost", 10000);
+    int x= MFS_Init("localhost",7011);
     assert(x==0);
     x= MFS_Creat(0, 0, "Foo");
     assert(x==0);

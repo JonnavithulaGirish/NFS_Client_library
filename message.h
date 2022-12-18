@@ -18,7 +18,7 @@ typedef struct {
     int rc;    // return code
     int rootInodeNum;
     int inodeNum;
-    char path[28];
+    char path[128];
     MFS_Stat_t fStats;
     char *buffer;
     int offset;

@@ -13,10 +13,11 @@
 
 message_t FileSystemUpdate(message_t m);
 int getPosition(unsigned int n);
+int  lookupHelperFun(inode_t inode,super_t *s,message_t m);
 
 // server code
 int main(int argc, char *argv[]) {
-    int sd = UDP_Open(10000);
+    int sd = UDP_Open(7011);
     assert(sd > -1);
     while (1) {
 		struct sockaddr_in addr;
@@ -25,8 +26,6 @@ int main(int argc, char *argv[]) {
 		int rc = UDP_Read(sd, &addr, (char *) &m, sizeof(message_t));
 		printf("server:: read message [size:%d contents:(%d)]\n", rc, m.mtype);
 		if (rc > 0) {
-			//if(m.path!= NULL)
-				//printf("madda kuda %s\n", m.path);
 			message_t res_m = FileSystemUpdate(m);
 			rc = UDP_Write(sd, &addr, (char *) &res_m, sizeof(message_t));
 			printf("server:: reply\n");
@@ -34,7 +33,7 @@ int main(int argc, char *argv[]) {
 				printf("Shutting down server");
 				exit(0);
 			}
-		} 
+		}
     }
     return 0; 
 }
@@ -56,7 +55,6 @@ message_t FileSystemUpdate(message_t m){
 		res_m.rootInodeNum = 0;
 	}
 	else if(m.mtype == MFS_CRET){
-		printf("madda kuda %s\n", m.path);
 		bitmap_t  *inode_bitmap= image+ (s->inode_bitmap_addr * UFS_BLOCK_SIZE);
 		bitmap_t  *data_bitmap= image+ (s->data_bitmap_addr * UFS_BLOCK_SIZE);
 		//Find free Inode position
@@ -98,7 +96,6 @@ message_t FileSystemUpdate(message_t m){
 					freeDatablockPos+=(32-position);
 					break;
 				}
-				freeDatablockPos += 32;
 			}
 			if(foundFreeDataNode)
 				break;
@@ -132,8 +129,44 @@ message_t FileSystemUpdate(message_t m){
 		}
 		rc = fsync(fd);
     	assert(rc > -1);
-	}
-	else if(m.mtype == MFS_SHUTDOWN){
+		
+	}else if(m.mtype== MFS_LOOKUP){
+		if(m.inodeNum<0 || m.inodeNum>= (s->inode_region_len*(UFS_BLOCK_SIZE))/sizeof(inode_t)){
+			res_m.mtype= MFS_LOOKUP;
+			res_m.rc = -1;
+		}else{
+			inode_t inode = inode_table[m.inodeNum];
+			if(inode.type == 1){
+				res_m.mtype= MFS_LOOKUP;
+				res_m.rc = -1;
+			}else{
+				char * token = strtok(m.path,"/");
+				while(token != NULL){
+					message_t tempMsg = m;
+					strcpy(tempMsg.path,token);
+					int new_inodeNum = lookupHelperFun(inode,s,tempMsg);
+					if(new_inodeNum == -1){
+						res_m.inodeNum = -1;
+						res_m.rc = -1;
+						break;
+					}
+					res_m.inodeNum = new_inodeNum;
+					res_m.rc = 1;
+					inode = inode_table[new_inodeNum];
+					token = strtok(NULL, " ");
+				}
+				
+			}
+			
+		}	
+	}else if(m.mtype == MFS_WRITE){
+		if(m.inodeNum<0 || m.inodeNum>= (s->inode_region_len*(UFS_BLOCK_SIZE))/sizeof(inode_t)){
+			res_m.mtype= MFS_LOOKUP;
+			res_m.rc = -1;
+		}else{
+
+		}
+	}else if(m.mtype == MFS_SHUTDOWN){
 		res_m.mtype= MFS_SHUTDOWN;
 		res_m.rc =1;
 		rc = fsync(fd);
@@ -164,5 +197,40 @@ int getPosition(unsigned int n){
 	return pos;
 }
 
+
+
+
+int  lookupHelperFun(inode_t inode,super_t *s,message_t m){
+	int datablocks = 0;
+	if(inode.size %UFS_BLOCK_SIZE ==0){
+		datablocks = inode.size/UFS_BLOCK_SIZE;
+	}else{
+		datablocks = 1 + inode.size/UFS_BLOCK_SIZE;
+	}
+	for(int i=0;i<datablocks;i++){
+		dir_ent_t* dataBlock  = (dir_ent_t*) inode.direct[i];
+		if(i!=datablocks-1){
+			int maxDirEntries = UFS_BLOCK_SIZE/sizeof(dir_ent_t);
+			for(int j=0;j<maxDirEntries;j++){
+				dir_ent_t resInode = dataBlock[j];
+				if(strcmp(resInode.name,m.path) == 0){
+					return resInode.inum;
+				}
+			}
+		}else{
+			int x = inode.size %UFS_BLOCK_SIZE;
+			int maxDirEntries = x/sizeof(dir_ent_t);
+			for(int j=0;j<maxDirEntries;j++){
+				dir_ent_t resInode = dataBlock[j];
+				if(strcmp(resInode.name,m.path) == 0){
+					return resInode.inum;
+				}
+			}
+
+		}
+	}
+
+	return -1;
+}
 
 
