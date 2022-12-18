@@ -16,6 +16,7 @@ int getPosition(unsigned int n);
 int lookupHelperFun(inode_t* inode, super_t *s,message_t m, void* image);
 bool isInodeNumberValid(message_t m, super_t *s,bitmap_t *inode_bitmap);
 bool checkValidWrite(message_t m,super_t *s);
+void unlinkHelperFunc(int inodeIndex,bitmap_t  *inode_bitmap,bitmap_t  *data_bitmap,inode_t* inode);
 
 // server code
 int main(int argc, char *argv[]) {
@@ -67,7 +68,6 @@ message_t FileSystemUpdate(message_t m, char* path){
 		res_m.rootInodeNum = 0;
 	}
 	else if(m.mtype == MFS_CRET){
-		printf("madda kuda %d\n", inode_table[m.inodeNum].type);
 		if(!isInodeNumberValid(m, s, inode_bitmap) || inode_table[m.inodeNum].type == 1){
 			res_m.mtype= MFS_CRET;
 			res_m.rc = -1;
@@ -153,6 +153,7 @@ message_t FileSystemUpdate(message_t m, char* path){
 			res_m.rc = -4;
 		}else{
 			inode_t* inode = &inode_table[m.inodeNum];
+			//if it is 0 then it is a directory or else it is a file.
 			if(inode->type == 0){
 				printf("Hi in the type check\n");
 				res_m.mtype= MFS_WRITE;
@@ -317,6 +318,41 @@ message_t FileSystemUpdate(message_t m, char* path){
 		res_m.fStats.type= inode_table->type;
 		res_m.fStats.size = inode_table->size;
 		res_m.rc =1;
+	}else if(m.mtype == MFS_UNLINK){
+		if(!isInodeNumberValid(m, s, inode_bitmap)){
+			// printf("Hi in the inode checker\n");
+			res_m.mtype= MFS_UNLINK;
+			res_m.rc = -1;
+		}else{
+			inode_t* inode = &inode_table[m.inodeNum];
+			inode_t* childInode;
+			if(inode->type == 1){
+				res_m.mtype= MFS_UNLINK;
+				res_m.rc = -1;
+			}else{
+				message_t tempMsg = m;
+				strcpy(tempMsg.path,m.path);
+				int childInodeNum = lookupHelperFun(inode,s,tempMsg,image);
+				if(childInodeNum == -1){
+					res_m.mtype= MFS_UNLINK;
+					res_m.rc = 1;
+				}else{
+					childInode = &inode_table[childInodeNum];
+					if(childInode->type == 0 && childInode->size != 64){
+						res_m.mtype= MFS_UNLINK;
+						res_m.rc = -1;
+					}else{
+						inode->size -=32;
+						unlinkHelperFunc(childInodeNum,inode_bitmap,data_bitmap,childInode);
+						rc = fsync(fd);
+						assert(rc > -1);
+						res_m.mtype= MFS_UNLINK;
+						res_m.rc = 1;	
+					}
+				}
+			}
+			
+		}
 	}
     close(fd);
     return res_m;
@@ -384,6 +420,45 @@ int lookupHelperFun(inode_t* inode, super_t *s,message_t m, void* image){
 
 	return -1;
 }
+
+void unlinkHelperFunc(int inodeIndex,bitmap_t  *inode_bitmap,bitmap_t  *data_bitmap,inode_t* inode){
+	int r = inodeIndex/(4096*8);
+	int c = inodeIndex%(4096*8);
+	inode_bitmap =inode_bitmap+r;
+	int r1 = c/8;
+	int c1 = c%8;
+	char* temp = (char*)inode_bitmap;
+	temp = temp + r1;
+	char val  = *temp;
+	int  pos = 1<<c1;
+	*temp = *temp^pos;	
+
+	int datablocks = 0;
+	// printf("node : %d\n",inode.);
+	if(inode->size %UFS_BLOCK_SIZE ==0){
+		datablocks = inode->size/UFS_BLOCK_SIZE;
+	}else{
+		datablocks = 1 + inode->size/UFS_BLOCK_SIZE;
+	}
+	
+	for(int i=0;i<datablocks;i++){
+		int dataBlockIndex= inode->direct[i];
+
+		int r = dataBlockIndex/(4096*8);
+		int c = dataBlockIndex%(4096*8);
+		data_bitmap =data_bitmap+r;
+		int r1 = c/8;
+		int c1 = c%8;
+		char* temp = (char*)data_bitmap;
+		temp = temp + r1;
+		char val  = *temp;
+		int  pos = 1<<c1;
+		*temp = *temp^pos;	
+	}
+
+
+}
+
 
 bool checkValidWrite(message_t m,super_t *s){
 	if(m.inodeNum<0 

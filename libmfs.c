@@ -215,6 +215,27 @@ int MFS_Creat(int pinum, int type, char *name) {
 }
 
 int MFS_Unlink(int pinum, char *name) {
+    if(connectionEstablished){
+        message_t m,res_m;
+        m.mtype = MFS_UNLINK;
+        m.inodeNum = pinum;
+        strcpy(m.path, name);
+        while(true){
+            res_m= sendMessageToServer(m);
+            if(!res_m.retry)
+                break;
+            else{
+                printf("Retrying MFS_Creat\n");
+            }
+        }
+        if(res_m.rc == -1){
+            return -1;
+        }
+        return 0;
+    }
+    else{
+        return -1;
+    }
     return 0;
 }
 
