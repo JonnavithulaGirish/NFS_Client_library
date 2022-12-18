@@ -68,7 +68,7 @@ int UDP_Close(int fd) {
 int UDP_Client_Read(int fd, struct sockaddr_in *addr, char *buffer, int n) {
     int len = sizeof(struct sockaddr_in); 
     struct timeval tv;
-    tv.tv_sec = 10;
+    tv.tv_sec = 2;
     tv.tv_usec = 0;
     if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv)<0)
         printf("setsockopt failed\n");

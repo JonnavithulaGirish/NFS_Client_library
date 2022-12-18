@@ -9,39 +9,48 @@
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <stdbool.h>
 
-
-message_t FileSystemUpdate(message_t m);
+message_t FileSystemUpdate(message_t m, char* path);
 int getPosition(unsigned int n);
 int lookupHelperFun(inode_t inode,super_t *s,message_t m, void* image);
+bool isInodeNumberValid(message_t m, super_t *s,bitmap_t *inode_bitmap);
 
 // server code
 int main(int argc, char *argv[]) {
-    int sd = UDP_Open(10000);
-    assert(sd > -1);
-    while (1) {
-		struct sockaddr_in addr;
-		message_t m;
-		printf("server:: waiting...\n");
-		int rc = UDP_Read(sd, &addr, (char *) &m, sizeof(message_t));
-		printf("server:: read message [size:%d contents:(%d)]\n", rc, m.mtype);
-		if (rc > 0) {
-			message_t res_m = FileSystemUpdate(m);
-			rc = UDP_Write(sd, &addr, (char *) &res_m, sizeof(message_t));
-			printf("server:: reply\n");
-			if(res_m.mtype == MFS_SHUTDOWN){
-				printf("Shutting down server");
-				exit(0);
-			}
-		} 
-    }
-    return 0; 
+	if(argc<2){
+		exit(0);
+	}
+	else{
+		int port  = atoi(argv[1]);
+		char *path = malloc(sizeof(char)*500);
+		strcpy(path, argv[2]);
+		int sd = UDP_Open(port);
+		assert(sd > -1);
+		while (1) {
+			struct sockaddr_in addr;
+			message_t m;
+			//printf("server:: waiting...\n");
+			int rc = UDP_Read(sd, &addr, (char *) &m, sizeof(message_t));
+			//printf("server:: read message [size:%d contents:(%d)]\n", rc, m.mtype);
+			if (rc > 0) {
+				message_t res_m = FileSystemUpdate(m, path);
+				rc = UDP_Write(sd, &addr, (char *) &res_m, sizeof(message_t));
+				//printf("server:: reply\n");
+				if(res_m.mtype == MFS_SHUTDOWN){
+					//printf("Shutting down server");
+					exit(0);
+				}
+			} 
+		}
+		return 0; 
+	}
 }
 
  
-message_t FileSystemUpdate(message_t m){
+message_t FileSystemUpdate(message_t m, char* path){
 	message_t res_m;
-	int fd = open("test.img", O_RDWR);
+	int fd = open(path, O_RDWR);
     assert(fd > -1);
     struct stat sbuf;
     int rc = fstat(fd, &sbuf);
@@ -51,44 +60,41 @@ message_t FileSystemUpdate(message_t m){
     assert(image != MAP_FAILED);
     super_t *s = (super_t *) image;
 	inode_t *inode_table = image + (s->inode_region_addr * UFS_BLOCK_SIZE);
+	bitmap_t  *inode_bitmap= image+ (s->inode_bitmap_addr * UFS_BLOCK_SIZE);
+	bitmap_t  *data_bitmap= image+ (s->data_bitmap_addr * UFS_BLOCK_SIZE);
 	if(m.mtype== MFS_INIT){
 		res_m.rootInodeNum = 0;
 	}
 	else if(m.mtype == MFS_CRET){
-		printf("madda kuda %s\n", m.path);
-		bitmap_t  *inode_bitmap= image+ (s->inode_bitmap_addr * UFS_BLOCK_SIZE);
-		bitmap_t  *data_bitmap= image+ (s->data_bitmap_addr * UFS_BLOCK_SIZE);
-		//Find free Inode position
-		int freeInodeblockPos=0;
-		bool foundFreeInode= false;
-		for(int i=0;i< s->inode_bitmap_len; i++){
-			for(int j=0; j <1024;j++){
+		//printf("madda kuda %s\n", m.path);
+		if(!isInodeNumberValid(m, s, inode_bitmap)){
+			res_m.mtype= MFS_LOOKUP;
+			res_m.rc = -1;
+		}
+		else{
+			//Find free Inode position
+			int freeInodeblockPos=0;
+			for(int j=0; j < (1024 * s->inode_bitmap_len); j++){
 				unsigned int temp = inode_bitmap->bits[0]&(inode_bitmap->bits[0] +1);
 				if(temp != 0){
 					int position = getPosition(inode_bitmap->bits[j]);
 					unsigned int bitMask = 1 << position;
 					inode_bitmap->bits[j] |= bitMask;
 					freeInodeblockPos+=(32-position);
-					foundFreeInode =true;
 					break;
 				}
 				freeInodeblockPos += 32;
 			}
-			if(foundFreeInode)
-				break;
-		}
-		freeInodeblockPos-=1;
-		printf("freeInodeblockPos: %d\n", freeInodeblockPos);
+			freeInodeblockPos-=1;
+			//printf("freeInodeblockPos: %d\n", freeInodeblockPos);
 
-		//Update Inode with data
-		inode_t *new_inode = &inode_table[freeInodeblockPos];
-		new_inode->type = m.fileType;
+			//Update Inode with data
+			inode_t *new_inode = &inode_table[freeInodeblockPos];
+			new_inode->type = m.fileType;
 
-		// //Find free Data node position
-		int freeDatablockPos=0;
-		bool foundFreeDataNode = false;
-		for(int i=0;i< s->data_bitmap_len; i++){
-			for(int j=0; j< 1024;j++){
+			// //Find free Data node position
+			int freeDatablockPos=0;
+			for(int j=0; j< 1024* s->data_bitmap_len; j++){
 				unsigned int temp = data_bitmap->bits[j]&(data_bitmap->bits[j]+1);
 				if(temp != 0){
 					int position = getPosition(data_bitmap->bits[j]);
@@ -99,40 +105,38 @@ message_t FileSystemUpdate(message_t m){
 				}
 				freeDatablockPos += 32;
 			}
-			if(foundFreeDataNode)
-				break;
+			freeDatablockPos-=1;
+			//printf("freeDatablockPos: %d\n", freeDatablockPos);
+			new_inode->direct[0]= s->data_region_addr + freeDatablockPos;
+
+
+			//update data of parentDir
+			inode_t* parent_dir_inode = &inode_table[m.inodeNum];
+			int directDatablock = parent_dir_inode->size/UFS_BLOCK_SIZE;
+			int directDatablockIndex = (parent_dir_inode->size % UFS_BLOCK_SIZE )/sizeof(dir_ent_t);
+			
+			//if type is directory/file update inode and data for parent
+			parent_dir_inode->size += sizeof(dir_ent_t);
+			//printf("update parent direct size: %d/n",parent_dir_inode->size);
+			dir_block_t* parent_dir_data_block = image + (parent_dir_inode->direct[directDatablock] * UFS_BLOCK_SIZE);
+			parent_dir_data_block->dirEntries[directDatablockIndex].inum= freeInodeblockPos;
+			strcpy(parent_dir_data_block->dirEntries[directDatablockIndex].name,  m.path);
+
+			//printf("file type:  %d\n", m.fileType);
+			if(m.fileType == UFS_DIRECTORY){
+				//if type is directory update data new data block
+				new_inode->size = 2* sizeof(dir_ent_t);
+				dir_block_t * new_dir_data_block = image + (new_inode->direct[0] * UFS_BLOCK_SIZE);
+				new_dir_data_block->dirEntries[0].inum= freeInodeblockPos;
+				strcpy(new_dir_data_block->dirEntries[0].name,  "." );
+				new_dir_data_block->dirEntries[1].inum= m.inodeNum;
+				strcpy(new_dir_data_block->dirEntries[1].name,  "..");
+				//printf("inode type:: %d, size:: %d\n", new_inode->type, new_inode->size);
+			}
+			//printf("root inode type:: %d, size:: %d\n", inode_table[m.inodeNum].type , inode_table[m.inodeNum].size);
+			rc = fsync(fd);
+			assert(rc > -1);
 		}
-		freeDatablockPos-=1;
-		printf("freeDatablockPos: %d\n", freeDatablockPos);
-		new_inode->direct[0]= s->data_region_addr + freeDatablockPos;
-
-
-		//update data of parentDir
-		inode_t* parent_dir_inode = &inode_table[m.inodeNum];
-		int directDatablock = parent_dir_inode->size/UFS_BLOCK_SIZE;
-		int directDatablockIndex = (parent_dir_inode->size % UFS_BLOCK_SIZE )/sizeof(dir_ent_t);
-		
-		//if type is directory/file update inode and data for parent
-		parent_dir_inode->size += sizeof(dir_ent_t);
-		printf("update parent direct size: %d/n",parent_dir_inode->size);
-		dir_block_t* parent_dir_data_block = image + (parent_dir_inode->direct[directDatablock] * UFS_BLOCK_SIZE);
-		parent_dir_data_block->dirEntries[directDatablockIndex].inum= freeInodeblockPos;
-		strcpy(parent_dir_data_block->dirEntries[directDatablockIndex].name,  m.path);
-
-		printf("file type:  %d\n", m.fileType);
-		if(m.fileType == UFS_DIRECTORY){
-			//if type is directory update data new data block
-			new_inode->size = 2* sizeof(dir_ent_t);
-			dir_block_t * new_dir_data_block = image + (new_inode->direct[0] * UFS_BLOCK_SIZE);
-			new_dir_data_block->dirEntries[0].inum= freeInodeblockPos;
-			strcpy(new_dir_data_block->dirEntries[0].name,  "." );
-			new_dir_data_block->dirEntries[1].inum= m.inodeNum;
-			strcpy(new_dir_data_block->dirEntries[1].name,  "..");
-			printf("inode type:: %d, size:: %d\n", new_inode->type, new_inode->size);
-		}
-		printf("root inode type:: %d, size:: %d\n", inode_table[m.inodeNum].type , inode_table[m.inodeNum].size);
-		rc = fsync(fd);
-    	assert(rc > -1);
 	}
 	else if(m.mtype == MFS_SHUTDOWN){
 		res_m.mtype= MFS_SHUTDOWN;
@@ -142,12 +146,11 @@ message_t FileSystemUpdate(message_t m){
 	}
 	else if(m.mtype== MFS_LOOKUP){
 
-		if(m.inodeNum<0 || m.inodeNum>= (s->inode_region_len*(UFS_BLOCK_SIZE))/sizeof(inode_t)){
+		if(!isInodeNumberValid(m, s, inode_bitmap)){
 			res_m.mtype= MFS_LOOKUP;
 			res_m.rc = -1;
 		}else{
 			inode_t inode = inode_table[m.inodeNum];
-			printf("Hi in the lookup -------- %d,%d",inode.type,inode.size);
 			if(inode.type == 1){
 				res_m.mtype= MFS_LOOKUP;
 				res_m.rc = -1;
@@ -204,7 +207,21 @@ int getPosition(unsigned int n){
 	return pos;
 }
 
-int lookupHelperFun(inode_t inode,super_t *s,message_t m, void* image){
+bool isInodeNumberValid(message_t m, super_t *s,bitmap_t *inode_bitmap){
+	if(m.inodeNum<0 || m.inodeNum>= (s->inode_region_len*(UFS_BLOCK_SIZE))/sizeof(inode_t)){
+			return false;
+	}
+	// is present in bitmap or not
+	int test=  m.inodeNum%32 == 0 ? (m.inodeNum/32)+1 : m.inodeNum/32;
+	int pos = m.inodeNum%32;
+	if(inode_bitmap->bits[test]>>(32-pos)&(1) % 2 == 1){	
+		return false;
+	}
+	return true;
+}
+
+ 
+int lookupHelperFun(inode_t inode, super_t *s,message_t m, void* image){
 	int datablocks = 0;
 	// printf("node : %d\n",inode.);
 	if(inode.size %UFS_BLOCK_SIZE ==0){

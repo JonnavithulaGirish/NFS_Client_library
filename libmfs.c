@@ -4,26 +4,30 @@
 #include "message.h"
 #include <limits.h>
 #include <stdbool.h>
+#include <time.h>
 
 
 struct sockaddr_in addrSnd, addrRcv;
 int sd,rc;
 int rootInodeNum;
 bool connectionEstablished;
+int MIN_PORT = 20000;
+int MAX_PORT = 40000;
 
 
 int createUdpConnection(char* hostname, int port){
-    sd = UDP_Open(30000);
+    srand(time(0));
+    int port_num = (rand() % (MAX_PORT - MIN_PORT) + MIN_PORT);
+    // Bind random client port number
+    sd = UDP_Open(port_num);;
     rc = UDP_FillSockAddr(&addrSnd, hostname, port);
-    assert(sd>0 && rc>=0);
+    //assert(sd>0 && rc>=0);
     connectionEstablished= true;
     return 1;
 }
 
 message_t sendMessageToServer(message_t m){
     printf("client:: send message %d\n", m.mtype);
-    if(m.path != NULL)
-        printf("client data :%s\n", m.path);
     rc = UDP_Write(sd, &addrSnd, (char *) &m, sizeof(message_t));
     if (rc < 0) {
 	    printf("client:: failed to send\n");
@@ -123,13 +127,19 @@ int MFS_Read(int inum, char *buffer, int offset, int nbytes) {
 }
 
 int MFS_Creat(int pinum, int type, char *name) {
-    if(connectionEstablished){
+    if(connectionEstablished && strlen(name)<=27){
+        // int newInodeNum = MFS_Lookup(pinum,name);
+        // if(newInodeNum>0){
+
+        // }
+        // else{
+        //     return -1;
+        // }
         message_t m,res_m;
         m.mtype = MFS_CRET;
         m.inodeNum = pinum;
         m.fileType = type;
         strcpy(m.path, name);
-        printf("client:: sending path %s------------\n",m.path);
         while(true){
             res_m= sendMessageToServer(m);
             if(!res_m.retry)
@@ -138,6 +148,7 @@ int MFS_Creat(int pinum, int type, char *name) {
                 printf("Retrying MFS_Creat\n");
             }
         }
+        return res_m.rc;
     }
     else{
         return -1;
@@ -158,15 +169,14 @@ int MFS_Shutdown() {
             if(!res_m.retry)
                 break;
             else{
-                printf("Retrying MFS_Shutdown\n");
+                //printf("Retrying MFS_Shutdown\n");
             }
         }
         assert(res_m.retry== false && res_m.rc==1);
-        printf("Server shutdown successful\n");
+        //printf("Server shutdown successful\n");
     }    
     else{
         return -1;
     }
     return 0;
 }
-

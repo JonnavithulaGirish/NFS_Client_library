@@ -1,0 +1,718 @@
+('starting', 'build')
+
+**********************************************************************
+
+Test build
+build project using make
+
+**********************************************************************
+Trying to build project using make
+make
+make: 'libmfs.so' is up to date.
+
+
+test build PASSED
+ (build project using make)
+
+('starting', 'shutdown')
+
+**********************************************************************
+
+Test shutdown
+init server and client then call shutdown
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9097
+/tmp/tmpUhPfeo/p/server 9097 /home/girish/p4/p4/test.img
+MFS Init2 localhost 9097
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:3]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 8
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:8]
+
+
+test shutdown PASSED
+ (init server and client then call shutdown)
+
+('starting', 'creat')
+
+**********************************************************************
+
+Test creat
+creat a file and check with lookup
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 7009
+/tmp/tmpUhPfeo/p/server 7009 /home/girish/p4/p4/test.img
+MFS Init2 localhost 7009
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:3]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:3]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:3]
+client:: send message 8
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:8]
+
+
+test creat PASSED
+ (creat a file and check with lookup)
+
+('starting', 'write')
+
+**********************************************************************
+
+Test write
+write then read one block
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 8286
+/tmp/tmpUhPfeo/p/server 8286 /home/girish/p4/p4/test.img
+MFS Init2 localhost 8286
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:0]
+('START BLOCK 1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00', '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00END BLOCK 1')
+('\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00', '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
+Failure: Corrupt data returned by read
+
+
+test write FAILED
+ (write then read one block)
+ Corrupt data returned by read
+
+('starting', 'stat')
+
+**********************************************************************
+
+Test stat
+stat a regular file
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 6017
+/tmp/tmpUhPfeo/p/server 6017 /home/girish/p4/p4/test.img
+MFS Init2 localhost 6017
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:21953 type:1896228601]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:21953 type:1896228601]
+Failure: MFS_Creat returned failure inum=0 type=1 name='test'
+
+
+test stat FAILED
+ (stat a regular file)
+ MFS_Creat returned failure inum=0 type=1 name='test'
+
+('starting', 'overwrite')
+
+**********************************************************************
+
+Test overwrite
+overwrite a block
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 6281
+/tmp/tmpUhPfeo/p/server 6281 /home/girish/p4/p4/test.img
+MFS Init2 localhost 6281
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:0]
+Failure: Corrupt data returned by read
+
+
+test overwrite FAILED
+ (overwrite a block)
+ Corrupt data returned by read
+
+('starting', 'maxfile')
+
+**********************************************************************
+
+Test maxfile
+write largest possible file
+
+**********************************************************************
+total blocks        39
+  inodes            128 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 6963
+/tmp/tmpUhPfeo/p/server 6963 /home/girish/p4/p4/test.img
+MFS Init2 localhost 6963
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:0]
+Failure: Corrupt data returned by read
+
+
+test maxfile FAILED
+ (write largest possible file)
+ Corrupt data returned by read
+
+('starting', 'maxfile2')
+
+**********************************************************************
+
+Test maxfile2
+write more blocks than possible
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 6649
+/tmp/tmpUhPfeo/p/server 6649 /home/girish/p4/p4/test.img
+MFS Init2 localhost 6649
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:21955 type:493426425]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:21955 type:493426425]
+Failure: MFS_Creat returned failure inum=0 type=1 name='test'
+
+
+test maxfile2 FAILED
+ (write more blocks than possible)
+ MFS_Creat returned failure inum=0 type=1 name='test'
+
+('starting', 'dir1')
+
+**********************************************************************
+
+Test dir1
+check root for dot entries
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 6308
+/tmp/tmpUhPfeo/p/server 6308 /home/girish/p4/p4/test.img
+MFS Init2 localhost 6308
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:0]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:0]
+client:: send message 8
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:8]
+
+
+test dir1 PASSED
+ (check root for dot entries)
+
+('starting', 'dir2')
+
+**********************************************************************
+
+Test dir2
+create a new directory and check it
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9798
+/tmp/tmpUhPfeo/p/server 9798 /home/girish/p4/p4/test.img
+MFS Init2 localhost 9798
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:3]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:3]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:3]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:-1 type:2]
+Failure: MFS_Lookup returned failure inum=1 name='.'
+
+
+test dir2 FAILED
+ (create a new directory and check it)
+ MFS_Lookup returned failure inum=1 name='.'
+
+('starting', 'baddir')
+
+**********************************************************************
+
+Test baddir
+try to create a file with a file parent inode
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 7640
+/tmp/tmpUhPfeo/p/server 7640 /home/girish/p4/p4/test.img
+MFS Init2 localhost 7640
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:0]
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:-1 type:2]
+client:: send message 8
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:8]
+
+
+test baddir PASSED
+ (try to create a file with a file parent inode)
+
+('starting', 'baddir2')
+
+**********************************************************************
+
+Test baddir2
+try to lookup a file with a file parent inode
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5026
+/tmp/tmpUhPfeo/p/server 5026 /home/girish/p4/p4/test.img
+MFS Init2 localhost 5026
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:0]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:-1 type:2]
+client:: send message 8
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:8]
+
+
+test baddir2 PASSED
+ (try to lookup a file with a file parent inode)
+
+('starting', 'unlink')
+
+**********************************************************************
+
+Test unlink
+unlink a file
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9474
+/tmp/tmpUhPfeo/p/server 9474 /home/girish/p4/p4/test.img
+MFS Init2 localhost 9474
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:0]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:0]
+Failure: MFS_Lookup should fail on an unlinked file
+
+
+test unlink FAILED
+ (unlink a file)
+ MFS_Lookup should fail on an unlinked file
+
+('starting', 'unlink2')
+
+**********************************************************************
+
+Test unlink2
+unlink a directory
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9849
+/tmp/tmpUhPfeo/p/server 9849 /home/girish/p4/p4/test.img
+MFS Init2 localhost 9849
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:3]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:3]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:3]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:3]
+Failure: MFS_Lookup should fail on an unlinked file
+
+
+test unlink2 FAILED
+ (unlink a directory)
+ MFS_Lookup should fail on an unlinked file
+
+('starting', 'empty')
+
+**********************************************************************
+
+Test empty
+unlink a non-empty directory
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9457
+/tmp/tmpUhPfeo/p/server 9457 /home/girish/p4/p4/test.img
+MFS Init2 localhost 9457
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:0]
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:-1 type:2]
+Failure: MFS_Creat returned failure inum=1 type=1 name='testfile'
+
+
+test empty FAILED
+ (unlink a non-empty directory)
+ MFS_Creat returned failure inum=1 type=1 name='testfile'
+
+('starting', 'name')
+
+**********************************************************************
+
+Test name
+name too long
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5555
+/tmp/tmpUhPfeo/p/server 5555 /home/girish/p4/p4/test.img
+MFS Init2 localhost 5555
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 8
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:8]
+
+
+test name PASSED
+ (name too long)
+
+('starting', 'persist')
+
+**********************************************************************
+
+Test persist
+restart server after creating a file
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 7143
+/tmp/tmpUhPfeo/p/server 7143 /home/girish/p4/p4/test.img
+MFS Init2 localhost 7143
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:0]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:0]
+Failure: Corrupt data returned by read
+
+
+test persist FAILED
+ (restart server after creating a file)
+ Corrupt data returned by read
+
+('starting', 'bigdir')
+
+**********************************************************************
+
+Test bigdir
+create a directory with 126 files
+
+**********************************************************************
+total blocks        39
+  inodes            128 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5001
+/tmp/tmpUhPfeo/p/server 5001 /home/girish/p4/p4/test.img
+MFS Init2 localhost 5001
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:3]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:3]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:3]
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:-1 type:2]
+Failure: MFS_Creat returned failure inum=1 type=1 name='0'
+
+
+test bigdir FAILED
+ (create a directory with 126 files)
+ MFS_Creat returned failure inum=1 type=1 name='0'
+
+('starting', 'deep')
+
+**********************************************************************
+
+Test deep
+create many deeply nested directories
+
+**********************************************************************
+total blocks        39
+  inodes            128 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 8555
+/tmp/tmpUhPfeo/p/server 8555 /home/girish/p4/p4/test.img
+MFS Init2 localhost 8555
+client:: send message 1
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+Conncetion was established with Server & rootInodeNum is : 0
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:0 type:0]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [size:80 rc:1 type:0]
+client:: send message 6
+client:: wait for reply...
+client:: got reply [size:80 rc:-1 type:2]
+Failure: MFS_Creat returned failure inum=1 type=0 name='0'
+
+
+test deep FAILED
+ (create many deeply nested directories)
+ MFS_Creat returned failure inum=1 type=0 name='0'
+
+**********************************************************************
+Summary:
+test build PASSED
+ (build project using make)
+
+test shutdown PASSED
+ (init server and client then call shutdown)
+
+test creat PASSED
+ (creat a file and check with lookup)
+
+test write FAILED
+ (write then read one block)
+ Corrupt data returned by read
+
+test stat FAILED
+ (stat a regular file)
+ MFS_Creat returned failure inum=0 type=1 name='test'
+
+test overwrite FAILED
+ (overwrite a block)
+ Corrupt data returned by read
+
+test maxfile FAILED
+ (write largest possible file)
+ Corrupt data returned by read
+
+test maxfile2 FAILED
+ (write more blocks than possible)
+ MFS_Creat returned failure inum=0 type=1 name='test'
+
+test dir1 PASSED
+ (check root for dot entries)
+
+test dir2 FAILED
+ (create a new directory and check it)
+ MFS_Lookup returned failure inum=1 name='.'
+
+test baddir PASSED
+ (try to create a file with a file parent inode)
+
+test baddir2 PASSED
+ (try to lookup a file with a file parent inode)
+
+test unlink FAILED
+ (unlink a file)
+ MFS_Lookup should fail on an unlinked file
+
+test unlink2 FAILED
+ (unlink a directory)
+ MFS_Lookup should fail on an unlinked file
+
+test empty FAILED
+ (unlink a non-empty directory)
+ MFS_Creat returned failure inum=1 type=1 name='testfile'
+
+test name PASSED
+ (name too long)
+
+test persist FAILED
+ (restart server after creating a file)
+ Corrupt data returned by read
+
+test bigdir FAILED
+ (create a directory with 126 files)
+ MFS_Creat returned failure inum=1 type=1 name='0'
+
+test deep FAILED
+ (create many deeply nested directories)
+ MFS_Creat returned failure inum=1 type=0 name='0'
+
+Passed 7 of 19 tests.
+Overall 7 of 19
