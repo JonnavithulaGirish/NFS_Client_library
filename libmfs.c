@@ -8,7 +8,7 @@
 
 
 struct sockaddr_in addrSnd, addrRcv;
-int sd,rc;
+int sd=-10 ,rc;
 int rootInodeNum;
 bool connectionEstablished;
 int MIN_PORT = 20000;
@@ -18,10 +18,9 @@ int MAX_PORT = 40000;
 int createUdpConnection(char* hostname, int port){
     srand(time(0));
     int port_num = (rand() % (MAX_PORT - MIN_PORT) + MIN_PORT);
-    // Bind random client port number
     sd = UDP_Open(port_num);;
     rc = UDP_FillSockAddr(&addrSnd, hostname, port);
-    //assert(sd>0 && rc>=0);
+    assert(sd>0 && rc>=0);
     connectionEstablished= true;
     return 1;
 }
@@ -45,25 +44,14 @@ message_t sendMessageToServer(message_t m){
     return m;
 }
 
-
 int MFS_Init(char *hostname, int port) {
     printf("MFS Init2 %s %d\n", hostname, port);
-    message_t m,res_m;
-    m.mtype= MFS_INIT;
-    if(createUdpConnection(hostname,port)>0){
-        while(true){
-            res_m= sendMessageToServer(m);
-            if(!res_m.retry)
-                break;
-            else{
-                printf("Retrying MFS_Init\n");
-            }
-        }
-        rootInodeNum = res_m.rootInodeNum;
-        printf("Conncetion was established with Server & rootInodeNum is : %d\n", rootInodeNum);
+    if(connectionEstablished){
+        rootInodeNum =0;
+        return 0;
     }
     else{
-        return -1;
+        createUdpConnection(hostname,port);
     }
     return 0;
 }
@@ -186,13 +174,6 @@ int MFS_Read(int inum, char *buffer, int offset, int nbytes) {
 int MFS_Creat(int pinum, int type, char *name) {
     if(connectionEstablished && strlen(name)<=27){
         printf("MFS_Creat pinum :: %d path:: %s type:: %d \n", pinum, name, type);
-        // int newInodeNum = MFS_Lookup(pinum,name);
-        // if(newInodeNum>0){
-
-        // }
-        // else{
-        //     return -1;
-        // }
         message_t m,res_m;
         m.mtype = MFS_CRET;
         m.inodeNum = pinum;
@@ -206,7 +187,12 @@ int MFS_Creat(int pinum, int type, char *name) {
                 printf("Retrying MFS_Creat\n");
             }
         }
-        return res_m.rc;
+        printf("Successfully created file %s\n", name);
+        printf("Successfully created file  with rc:: %d\n", res_m.rc);
+        if(res_m.rc<0)
+            return -1;
+        else
+            return 0;
     }
     else{
         return -1;

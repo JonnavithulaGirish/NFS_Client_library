@@ -9,39 +9,23 @@ int main(int argc, char *argv[]) {
     // return 0;
     int x= MFS_Init("localhost", 10000);
     assert(x==0);
-    x= MFS_Creat(0, 1, "testfile");
+    x= MFS_Creat(0, 0, "testfolder");
     assert(x==0);
-    x= MFS_Lookup(0, "testdir");
-    printf("testdir inum:: %d\n", x);
-    // x= MFS_Creat(x, 1 ,"testFile");
-    // printf("testFile inum:: %d\n", x);
-    char buff[1024] = "START BLOCK";
-    x= MFS_Write(x,buff,0,strlen(buff));
-    char buff1[]
-    // for(int i=0;i<126;i++){
-    //     x= MFS_Creat(x,1,itoa(i));
-    // }
-    // for(int i=0;i<126;i++){
-    //     x= MFS_Lookup(0, "testdir");
-    // }
+    int inum = MFS_Lookup(0,"testfolder");
+    printf("testfolder inodenum:: %d\n",inum);
+    for(int i=0;i<126;i++){
+        char int_str[30];
+        sprintf(int_str, "%d", i);
+        x= MFS_Creat(inum, 1, int_str);
+        assert(x==0);
+    }
+    for(int i=0;i<126;i++){
+        char int_str[30];
+        sprintf(int_str, "%d", i);
+        x= MFS_Lookup(inum,int_str);
+        printf("lol inodenum:: %d\n",x);
+    }
     x = MFS_Shutdown();
     assert(x==0);
-    printf("Client Execution successful\n");
-
-    // int x= MFS_Init("localhost", 10000);
-    // assert(x==0);
-    // x= MFS_Lookup(0, "Foo");
-    // printf("inodenumber:: %d\n",x);
-    // x= MFS_Lookup(0, "main.c");
-    // printf("inodenumber:: %d\n",x);
-    //  x= MFS_Lookup(0, "./Foo");
-    // printf("inodenumber:: %d\n",x);
-    // x= MFS_Lookup(0, "../Foo");
-    // printf("inodenumber:: %d\n",x);
-
-    // x= MFS_Lookup(0, "/Foo");
-    // printf("inodenumber:: %d\n",x);
-    //  x= MFS_Lookup(0, "/main.c");
-    // printf("inodenumber:: %d\n",x);
 }
 

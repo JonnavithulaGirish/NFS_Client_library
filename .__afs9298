@@ -28,12 +28,12 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 5945
-/tmp/tmpZ2ph3C/p/server 5945 /home/girish/p4/p4/test.img
+Starting server on port 9579
+/tmp/tmpF_kL9Q/p/server 9579 /home/girish/p4/p4/test.img
 server:: waiting...
 server:: read message [size:4164 contents:(8)]
 server:: reply
-Shutting down serverMFS Init2 localhost 5945
+Shutting down serverMFS Init2 localhost 9579
 client:: send message 8
 client:: wait for reply...
 client:: got reply [ rc:1 type:8]
@@ -57,8 +57,8 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 9944
-/tmp/tmpZ2ph3C/p/server 9944 /home/girish/p4/p4/test.img
+Starting server on port 7316
+/tmp/tmpF_kL9Q/p/server 7316 /home/girish/p4/p4/test.img
 server:: waiting...
 server:: read message [size:4164 contents:(6)]
 freeInodeblockPos: 1
@@ -67,11 +67,12 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(8)]
 server:: reply
-Shutting down serverMFS Init2 localhost 9944
+Shutting down serverMFS Init2 localhost 7316
 MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
@@ -104,8 +105,8 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 9186
-/tmp/tmpZ2ph3C/p/server 9186 /home/girish/p4/p4/test.img
+Starting server on port 7793
+/tmp/tmpF_kL9Q/p/server 7793 /home/girish/p4/p4/test.img
 server:: waiting...
 server:: read message [size:4164 contents:(6)]
 freeInodeblockPos: 1
@@ -114,6 +115,7 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(4)]
@@ -124,7 +126,7 @@ server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(8)]
 server:: reply
-Shutting down serverMFS Init2 localhost 9186
+Shutting down serverMFS Init2 localhost 7793
 MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
@@ -165,8 +167,8 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 5054
-/tmp/tmpZ2ph3C/p/server 5054 /home/girish/p4/p4/test.img
+Starting server on port 8912
+/tmp/tmpF_kL9Q/p/server 8912 /home/girish/p4/p4/test.img
 server:: waiting...
 server:: read message [size:4164 contents:(6)]
 freeInodeblockPos: 1
@@ -175,6 +177,7 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(3)]
@@ -191,7 +194,7 @@ server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(8)]
 server:: reply
-Shutting down serverMFS Init2 localhost 5054
+Shutting down serverMFS Init2 localhost 8912
 MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
@@ -239,8 +242,8 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 5346
-/tmp/tmpZ2ph3C/p/server 5346 /home/girish/p4/p4/test.img
+Starting server on port 9742
+/tmp/tmpF_kL9Q/p/server 9742 /home/girish/p4/p4/test.img
 server:: waiting...
 server:: read message [size:4164 contents:(6)]
 freeInodeblockPos: 1
@@ -249,6 +252,7 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(4)]
@@ -265,7 +269,7 @@ server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(8)]
 server:: reply
-Shutting down serverMFS Init2 localhost 5346
+Shutting down serverMFS Init2 localhost 9742
 MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
@@ -310,9 +314,9 @@ total blocks        39
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 6449
-/tmp/tmpZ2ph3C/p/server 6449 /home/girish/p4/p4/test.img
-MFS Init2 localhost 6449
+Starting server on port 9858
+/tmp/tmpF_kL9Q/p/server 9858 /home/girish/p4/p4/test.img
+MFS Init2 localhost 9858
 MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
@@ -463,6 +467,7 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(4)]
@@ -717,9 +722,9 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 5255
-/tmp/tmpZ2ph3C/p/server 5255 /home/girish/p4/p4/test.img
-MFS Init2 localhost 5255
+Starting server on port 6403
+/tmp/tmpF_kL9Q/p/server 6403 /home/girish/p4/p4/test.img
+MFS Init2 localhost 6403
 MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
@@ -872,6 +877,7 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(4)]
@@ -1141,18 +1147,20 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 9908
-/tmp/tmpZ2ph3C/p/server 9908 /home/girish/p4/p4/test.img
+Starting server on port 8822
+/tmp/tmpF_kL9Q/p/server 8822 /home/girish/p4/p4/test.img
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---64 0 .:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---64 0 ..:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(8)]
 server:: reply
-Shutting down serverMFS Init2 localhost 9908
+Shutting down serverMFS Init2 localhost 8822
 client:: send message 2
 client:: wait for reply...
 client:: got reply [ rc:1 type:0]
@@ -1182,8 +1190,8 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 8231
-/tmp/tmpZ2ph3C/p/server 8231 /home/girish/p4/p4/test.img
+Starting server on port 9638
+/tmp/tmpF_kL9Q/p/server 9638 /home/girish/p4/p4/test.img
 server:: waiting...
 server:: read message [size:4164 contents:(6)]
 freeInodeblockPos: 1
@@ -1193,17 +1201,20 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 testdir:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---64 0 .:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---64 0 ..:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(8)]
 server:: reply
-Shutting down serverMFS Init2 localhost 8231
+Shutting down serverMFS Init2 localhost 9638
 MFS_Creat pinum :: 0 path:: testdir type:: 0 
 client:: send message 6
 client:: wait for reply...
@@ -1242,8 +1253,8 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 9085
-/tmp/tmpZ2ph3C/p/server 9085 /home/girish/p4/p4/test.img
+Starting server on port 8928
+/tmp/tmpF_kL9Q/p/server 8928 /home/girish/p4/p4/test.img
 server:: waiting...
 server:: read message [size:4164 contents:(6)]
 freeInodeblockPos: 1
@@ -1252,6 +1263,7 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 testdir:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(6)]
@@ -1259,7 +1271,7 @@ madda kuduvserver:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(8)]
 server:: reply
-Shutting down serverMFS Init2 localhost 9085
+Shutting down serverMFS Init2 localhost 8928
 MFS_Creat pinum :: 0 path:: testdir type:: 1 
 client:: send message 6
 client:: wait for reply...
@@ -1298,8 +1310,8 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 8288
-/tmp/tmpZ2ph3C/p/server 8288 /home/girish/p4/p4/test.img
+Starting server on port 7009
+/tmp/tmpF_kL9Q/p/server 7009 /home/girish/p4/p4/test.img
 server:: waiting...
 server:: read message [size:4164 contents:(6)]
 freeInodeblockPos: 1
@@ -1308,14 +1320,16 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 testdir:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in the file lookup
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(8)]
 server:: reply
-Shutting down serverMFS Init2 localhost 8288
+Shutting down serverMFS Init2 localhost 7009
 MFS_Creat pinum :: 0 path:: testdir type:: 1 
 client:: send message 6
 client:: wait for reply...
@@ -1351,27 +1365,9 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 7155
-/tmp/tmpZ2ph3C/p/server 7155 /home/girish/p4/p4/test.img
-server:: waiting...
-server:: read message [size:4164 contents:(6)]
-freeInodeblockPos: 1
-freeDatablockPos: 1
-root inode type:: 0, size:: 96
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(7)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(8)]
-server:: reply
-Shutting down serverMFS Init2 localhost 7155
+Starting server on port 8168
+/tmp/tmpF_kL9Q/p/server 8168 /home/girish/p4/p4/test.img
+MFS Init2 localhost 8168
 MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
@@ -1381,20 +1377,15 @@ Successfully created file  with rc:: 0
 client:: send message 2
 client:: wait for reply...
 client:: got reply [ rc:1 type:0]
-client:: send message 7
-client:: wait for reply...
-client:: got reply [ rc:1 type:7]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [ rc:-1 type:7]
-client:: send message 8
-client:: wait for reply...
-client:: got reply [ rc:1 type:8]
-Server shutdown successful
+client:: got reply [ rc:1 type:0]
+Failure: MFS_Lookup should fail on an unlinked file
 
 
-test unlink PASSED
+test unlink FAILED
  (unlink a file)
+ MFS_Lookup should fail on an unlinked file
 
 ('starting', 'unlink2')
 
@@ -1410,28 +1401,9 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 9170
-/tmp/tmpZ2ph3C/p/server 9170 /home/girish/p4/p4/test.img
-server:: waiting...
-server:: read message [size:4164 contents:(6)]
-freeInodeblockPos: 1
-freeDatablockPos: 1
-inode type:: 0, size:: 64
-root inode type:: 0, size:: 96
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(7)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(8)]
-server:: reply
-Shutting down serverMFS Init2 localhost 9170
+Starting server on port 6197
+/tmp/tmpF_kL9Q/p/server 6197 /home/girish/p4/p4/test.img
+MFS Init2 localhost 6197
 MFS_Creat pinum :: 0 path:: test type:: 0 
 client:: send message 6
 client:: wait for reply...
@@ -1441,20 +1413,15 @@ Successfully created file  with rc:: 0
 client:: send message 2
 client:: wait for reply...
 client:: got reply [ rc:1 type:0]
-client:: send message 7
-client:: wait for reply...
-client:: got reply [ rc:1 type:7]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [ rc:-1 type:7]
-client:: send message 8
-client:: wait for reply...
-client:: got reply [ rc:1 type:8]
-Server shutdown successful
+client:: got reply [ rc:1 type:0]
+Failure: MFS_Lookup should fail on an unlinked file
 
 
-test unlink2 PASSED
+test unlink2 FAILED
  (unlink a directory)
+ MFS_Lookup should fail on an unlinked file
 
 ('starting', 'empty')
 
@@ -1470,40 +1437,9 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 8200
-/tmp/tmpZ2ph3C/p/server 8200 /home/girish/p4/p4/test.img
-server:: waiting...
-server:: read message [size:4164 contents:(6)]
-freeInodeblockPos: 1
-freeDatablockPos: 1
-inode type:: 0, size:: 64
-root inode type:: 0, size:: 96
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(6)]
-freeInodeblockPos: 2
-freeDatablockPos: 2
-root inode type:: 0, size:: 96
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(7)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(7)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(7)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(8)]
-server:: reply
-Shutting down serverMFS Init2 localhost 8200
+Starting server on port 8677
+/tmp/tmpF_kL9Q/p/server 8677 /home/girish/p4/p4/test.img
+MFS Init2 localhost 8677
 MFS_Creat pinum :: 0 path:: testdir type:: 0 
 client:: send message 6
 client:: wait for reply...
@@ -1522,23 +1458,12 @@ Successfully created file  with rc:: 1
 client:: send message 2
 client:: wait for reply...
 client:: got reply [ rc:1 type:0]
-client:: send message 7
-client:: wait for reply...
-client:: got reply [ rc:-1 type:7]
-client:: send message 7
-client:: wait for reply...
-client:: got reply [ rc:1 type:7]
-client:: send message 7
-client:: wait for reply...
-client:: got reply [ rc:1 type:7]
-client:: send message 8
-client:: wait for reply...
-client:: got reply [ rc:1 type:8]
-Server shutdown successful
+Failure: MFS_Unlink should fail on non-empty dir
 
 
-test empty PASSED
+test empty FAILED
  (unlink a non-empty directory)
+ MFS_Unlink should fail on non-empty dir
 
 ('starting', 'name')
 
@@ -1554,12 +1479,12 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 8476
-/tmp/tmpZ2ph3C/p/server 8476 /home/girish/p4/p4/test.img
+Starting server on port 5867
+/tmp/tmpF_kL9Q/p/server 5867 /home/girish/p4/p4/test.img
 server:: waiting...
 server:: read message [size:4164 contents:(8)]
 server:: reply
-Shutting down serverMFS Init2 localhost 8476
+Shutting down serverMFS Init2 localhost 5867
 client:: send message 8
 client:: wait for reply...
 client:: got reply [ rc:1 type:8]
@@ -1583,8 +1508,8 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 7687
-/tmp/tmpZ2ph3C/p/server 7687 /home/girish/p4/p4/test.img
+Starting server on port 8952
+/tmp/tmpF_kL9Q/p/server 8952 /home/girish/p4/p4/test.img
 server:: waiting...
 server:: read message [size:4164 contents:(6)]
 freeInodeblockPos: 1
@@ -1593,12 +1518,14 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(4)]
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(5)]
@@ -1606,7 +1533,7 @@ server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(8)]
 server:: reply
-Shutting down serverMFS Init2 localhost 7687
+Shutting down serverMFS Init2 localhost 8952
 MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
@@ -1629,11 +1556,12 @@ client:: send message 8
 client:: wait for reply...
 client:: got reply [ rc:1 type:8]
 Server shutdown successful
-MFS Init2 localhost 7687
-Starting server on port 7687
-/tmp/tmpZ2ph3C/p/server 7687 /home/girish/p4/p4/test.img
+MFS Init2 localhost 8952
+Starting server on port 8952
+/tmp/tmpF_kL9Q/p/server 8952 /home/girish/p4/p4/test.img
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(5)]
@@ -1670,9 +1598,9 @@ total blocks        39
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 6695
-/tmp/tmpZ2ph3C/p/server 6695 /home/girish/p4/p4/test.img
-MFS Init2 localhost 6695
+Starting server on port 7493
+/tmp/tmpF_kL9Q/p/server 7493 /home/girish/p4/p4/test.img
+MFS Init2 localhost 7493
 MFS_Creat pinum :: 0 path:: testdir type:: 0 
 client:: send message 6
 client:: wait for reply...
@@ -1808,6 +1736,7 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 testdir:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(6)]
@@ -1954,8 +1883,7 @@ freeDatablockPos: 25
 root inode type:: 0, size:: 832
 server:: reply
 server:: waiting...
-server:: read message [size:4164 contents:(6)]
-freeInodeblockPo1 type:0]
+server:: read message [siz1 type:0]
 Successfully created file 19
 Successfully created file  with rc:: 1
 MFS_Creat pinum :: 1 path:: 20 type:: 1 
@@ -2082,7 +2010,8 @@ MFS_Creat pinum :: 1 path:: 40 type:: 1
 client:: send message 6
 client:: wait for reply...
 client:: got reply [ rc:1 type:0]
-Successfullys: 26
+Successfullye:4164 contents:(6)]
+freeInodeblockPos: 26
 freeDatablockPos: 26
 root inode type:: 0, size:: 864
 server:: reply
@@ -2237,8 +2166,7 @@ freeDatablockPos: 51
 root inode type:: 0, size:: 1664
 server:: reply
 server:: waiting...
-server:: read message [size:4164 contents:(6)]
-freeInode created file 40
+server:: read messa created file 40
 Successfully created file  with rc:: 1
 MFS_Creat pinum :: 1 path:: 41 type:: 1 
 client:: send message 6
@@ -2365,7 +2293,8 @@ client:: send message 6
 client:: wait for reply...
 client:: got reply [ rc:1 type:0]
 Successfully created file 61
-SucceblockPos: 52
+Succege [size:4164 contents:(6)]
+freeInodeblockPos: 52
 freeDatablockPos: 52
 root inode type:: 0, size:: 1696
 server:: reply
@@ -2520,7 +2449,7 @@ freeDatablockPos: 77
 root inode type:: 0, size:: 2496
 server:: reply
 server:: waiting...
-server:: read message [size:4164 contents:(6ssfully created file  with rc:: 1
+server:ssfully created file  with rc:: 1
 MFS_Creat pinum :: 1 path:: 62 type:: 1 
 client:: send message 6
 client:: wait for reply...
@@ -2646,7 +2575,7 @@ client:: send message 6
 client:: wait for reply...
 client:: got reply [ rc:1 type:0]
 Successfully created file 82
-Successfully created file  )]
+Successfully created file  : read message [size:4164 contents:(6)]
 freeInodeblockPos: 78
 freeDatablockPos: 78
 root inode type:: 0, size:: 2528
@@ -2801,8 +2730,7 @@ freeInodeblockPos: 103
 freeDatablockPos: 103
 root inode type:: 0, size:: 3328
 server:: reply
-server:: waiting...
-server:: read message [swith rc:: 1
+server:with rc:: 1
 MFS_Creat pinum :: 1 path:: 83 type:: 1 
 client:: send message 6
 client:: wait for reply...
@@ -3054,7 +2982,8 @@ client:: send message 6
 client:: wait for reply...
 client:: got reply [ rc:1 type:0]
 Successfully created file 124
-Successfully created ize:4164 contents:(6)]
+Successfully created : waiting...
+server:: read message [size:4164 contents:(6)]
 freeInodeblockPos: 104
 freeDatablockPos: 104
 root inode type:: 0, size:: 3360
@@ -3199,15 +3128,155 @@ root inode type:: 0, size:: 4096
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 0:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 1:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 2:
 server:: reply
 server:: waiting...
-server:: read message [size:4164 cfile  with rc:: 1
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 3:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 4:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 5:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 6:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 7:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 8:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 9:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 10:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 11:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 12:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 13:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 14:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 15:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 16:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 17:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 18:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 19:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 20:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 21:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 22:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 23:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 24:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 25:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 26:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 27:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 28:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 29:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 30:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 31:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 32:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 33:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 34:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 35:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 36:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookfile  with rc:: 1
 MFS_Creat pinum :: 1 path:: 125 type:: 1 
 client:: send message 6
 client:: wait for reply...
@@ -3351,157 +3420,148 @@ client:: wait for reply...
 client:: got reply [ rc:1 type:0]
 client:: send message 2
 client:: wait for reply...
-clientontents:(2)]
+clientup server ---4096 0 37:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 38:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 39:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 40:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 41:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 42:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 43:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 44:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 45:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 46:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 47:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 48:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 49:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 50:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 51:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 52:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 53:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 54:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 55:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 56:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 57:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 58:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 59:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 60:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 61:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 62:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 63:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 64:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 65:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 66:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 67:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 68:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 69:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 70:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 71:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:41:: got reply [ rc:1 type:0]
+Hi in lookup server ---4096 0 72:
+server:: rep:: got reply [ rc:1 type:0]
 client:: send message 2
 client:: wait for reply...
 client:: got reply [ rc:1 type:0]
@@ -3645,223 +3705,218 @@ client:: wait for reply...
 client:: got reply [ rc:1 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [ r64 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
-server:: waiting...
-server:: read message [size:4164 contents:(2)]
-server:: reply
+client:: got reply [ rly
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 73:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 74:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 75:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 76:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 77:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 78:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 79:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 80:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 81:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 82:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 83:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 84:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 85:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 86:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 87:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 88:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 89:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 90:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 91:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 92:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 93:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 94:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 95:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 96:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 97:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 98:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 99:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 100:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 101:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 102:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 103:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 104:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 105:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 106:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 107:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 108:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 109:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 110:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 111:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 112:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 113:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 114:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 115:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 116:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 117:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 118:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 119:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 120:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 121:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 122:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 123:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 124:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---4096 0 125:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(8)]
@@ -3986,8 +4041,8 @@ total blocks        39
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 5496
-/tmp/tmpZ2ph3C/p/server 5496 /home/girish/p4/p4/test.img
+Starting server on port 7210
+/tmp/tmpF_kL9Q/p/server 7210 /home/girish/p4/p4/test.img
 server:: waiting...
 server:: read message [size:4164 contents:(6)]
 freeInodeblockPos: 1
@@ -3997,6 +4052,7 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 testdir:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(6)]
@@ -4007,6 +4063,7 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 0:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(6)]
@@ -4017,6 +4074,7 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 1:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(6)]
@@ -4027,6 +4085,7 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 2:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(6)]
@@ -4037,26 +4096,32 @@ root inode type:: 0, size:: 96
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 3:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 testdir:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 0:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 1:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 2:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 3:
 server:: reply
 server:: waiting...
 server:: read message [size:4164 contents:(8)]
 server:: reply
-Shutting down serverMFS Init2 localhost 5496
+Shutting down serverMFS Init2 localhost 7210
 MFS_Creat pinum :: 0 path:: testdir type:: 0 
 client:: send message 6
 client:: wait for reply...
@@ -4164,14 +4229,17 @@ test baddir PASSED
 test baddir2 PASSED
  (try to lookup a file with a file parent inode)
 
-test unlink PASSED
+test unlink FAILED
  (unlink a file)
+ MFS_Lookup should fail on an unlinked file
 
-test unlink2 PASSED
+test unlink2 FAILED
  (unlink a directory)
+ MFS_Lookup should fail on an unlinked file
 
-test empty PASSED
+test empty FAILED
  (unlink a non-empty directory)
+ MFS_Unlink should fail on non-empty dir
 
 test name PASSED
  (name too long)
@@ -4185,5 +4253,5 @@ test bigdir PASSED
 test deep PASSED
  (create many deeply nested directories)
 
-Passed 19 of 19 tests.
-Overall 19 of 19
+Passed 16 of 19 tests.
+Overall 16 of 19
