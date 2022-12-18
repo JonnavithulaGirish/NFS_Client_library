@@ -25,8 +25,6 @@ int main(int argc, char *argv[]) {
 		int rc = UDP_Read(sd, &addr, (char *) &m, sizeof(message_t));
 		printf("server:: read message [size:%d contents:(%d)]\n", rc, m.mtype);
 		if (rc > 0) {
-			//if(m.path!= NULL)
-				//printf("madda kuda %s\n", m.path);
 			message_t res_m = FileSystemUpdate(m);
 			rc = UDP_Write(sd, &addr, (char *) &res_m, sizeof(message_t));
 			printf("server:: reply\n");
@@ -122,7 +120,7 @@ message_t FileSystemUpdate(message_t m){
 		if(m.fileType == UFS_DIRECTORY){
 			//if type is directory update data new data block
 			new_inode.size = 2* sizeof(dir_ent_t);
-			dir_block_t * new_dir_data_block = image +  + (s->data_region_addr*UFS_BLOCK_SIZE) + (new_inode.direct[0] * UFS_BLOCK_SIZE);
+			dir_block_t * new_dir_data_block = image + (new_inode.direct[0] * UFS_BLOCK_SIZE);
 			new_dir_data_block->dirEntries[0].inum= freeInodeblockPos;
 			strcpy(new_dir_data_block->dirEntries[0].name,  "." );
 			new_dir_data_block->dirEntries[1].inum= m.inodeNum;
