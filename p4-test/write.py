@@ -19,9 +19,12 @@ class WriteTest(MfsTest):
 
       buf1 = gen_block(1)
       self.write(inum, buf1, 0, MFS_BLOCK_SIZE)
-
+      print(buf1)
+      printf("---------------------------")
       buf2 = BlockBuffer()
       self.read(inum, buf2, 0, MFS_BLOCK_SIZE)
+      print(buf2)
+      printf("---------------------------")
 
       print(buf1[:40], buf1[-40:])
       print(buf2[:40], buf2[-40:])
@@ -142,11 +145,11 @@ class MaxFile2Test(MfsTest):
       inum = self.lookup(0, "test")
 
       buf = [gen_block(i) for i in range(MAX_FILE_BLOCKS + 1)]
-      print len(buf)
+      print(len(buf))
       for i in range(MAX_FILE_BLOCKS):
          # print "write = " + str(i)
          self.write(inum, buf[i], i*MFS_BLOCK_SIZE, MFS_BLOCK_SIZE)
-      print "write more than need"
+      print("write more than need")
       r = self.libmfs.MFS_Write(inum, byref(buf[MAX_FILE_BLOCKS]), MAX_FILE_BLOCKS * MFS_BLOCK_SIZE, MFS_BLOCK_SIZE)
       if r != -1:
          raise Failure("MFS_Write should fail on inalid block number")

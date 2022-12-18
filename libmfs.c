@@ -41,7 +41,7 @@ message_t sendMessageToServer(message_t m){
         printf("Client:: did not receive data from server\n");
         return m;
     }
-    printf("client:: got reply [size:%d rc:%d type:%d]\n", rc, m.rc, m.mtype);
+    printf("client:: got reply [ rc:%d type:%d]\n", m.rc, m.mtype);
     return m;
 }
 
@@ -126,7 +126,9 @@ int MFS_Write(int inum, char *buffer, int offset, int nbytes) {
         m.inodeNum = inum;
         m.nbytes = nbytes;
         m.offset = offset;
-        strcpy(m.buffer,buffer);
+        for(int i=0;i<nbytes;i++){
+            m.buffer[i] = buffer[i];
+        }
         while(true){
             res_m= sendMessageToServer(m);
             if(!res_m.retry)
@@ -135,12 +137,14 @@ int MFS_Write(int inum, char *buffer, int offset, int nbytes) {
                 printf("Retrying MFS_Creat\n");
             }
         }
-        if(res_m.rc == -1){
+        if(res_m.rc < 0){
+            printf("Retrying MFS_Write1\n");
             return -1;
         }
         return 0;
     }
     else{
+        printf("Retrying MFS_Write2\n");
         return -1;
     }
     return 0;
@@ -148,11 +152,40 @@ int MFS_Write(int inum, char *buffer, int offset, int nbytes) {
 
 
 int MFS_Read(int inum, char *buffer, int offset, int nbytes) {
+    if(connectionEstablished){
+        message_t m,res_m;
+        m.mtype = MFS_READ;
+        m.inodeNum = inum;
+        m.nbytes = nbytes;
+        m.offset = offset;
+        strcpy(m.buffer,buffer);
+        while(true){
+            res_m= sendMessageToServer(m);
+            if(!res_m.retry)
+                break;
+            else{
+                printf("Retrying MFS_Read\n");
+            }
+        }
+        if(res_m.rc < 0){
+            printf("Retrying  MFS_Read1\n");
+            return -1;
+        }
+        for(int i=0;i<nbytes;i++){
+            buffer[i] = res_m.buffer[i];
+        }
+        return 0;
+    }
+    else{
+        printf("Retrying  MFS_Read2\n");
+        return -1;
+    }
     return 0;
 }
 
 int MFS_Creat(int pinum, int type, char *name) {
     if(connectionEstablished && strlen(name)<=27){
+        printf("MFS_Creat pinum :: %d path:: %s type:: %d \n", pinum, name, type);
         // int newInodeNum = MFS_Lookup(pinum,name);
         // if(newInodeNum>0){
 
@@ -194,11 +227,11 @@ int MFS_Shutdown() {
             if(!res_m.retry)
                 break;
             else{
-                //printf("Retrying MFS_Shutdown\n");
+                printf("Retrying MFS_Shutdown\n");
             }
         }
         assert(res_m.retry== false && res_m.rc==1);
-        //printf("Server shutdown successful\n");
+        printf("Server shutdown successful\n");
     }    
     else{
         return -1;

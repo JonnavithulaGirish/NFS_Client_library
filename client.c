@@ -7,25 +7,26 @@
 // client code
 int main(int argc, char *argv[]) {
     // return 0;
-    // int x= MFS_Init("localhost", 10000);
-    // assert(x==0);
-    // x= MFS_Creat(0, 0, "Foo");
-    // assert(x==0);
-    // x= MFS_Creat(0, 1, "main.c");
-    // assert(x==0);
-    // MFS_Stat_t *m=  malloc(sizeof(MFS_Stat_t));
-    // x= MFS_Stat(0,m);
-    // printf("size:: %d\n", m->size);
-    // printf("type:: %d\n", m->type);
-    // assert(x==0);
-    // MFS_Stat_t *n=  malloc(sizeof(MFS_Stat_t));
-    // x= MFS_Stat(1,n);
-    // printf("size:: %d\n", n->size);
-    // printf("type:: %d\n", n->type);
-    // assert(x==0);
-    // x = MFS_Shutdown();
-    // assert(x==0);
-    // printf("Client Execution successful\n");
+    int x= MFS_Init("localhost", 10000);
+    assert(x==0);
+    x= MFS_Creat(0, 1, "testfile");
+    assert(x==0);
+    x= MFS_Lookup(0, "testdir");
+    printf("testdir inum:: %d\n", x);
+    // x= MFS_Creat(x, 1 ,"testFile");
+    // printf("testFile inum:: %d\n", x);
+    char buff[1024] = "START BLOCK";
+    x= MFS_Write(x,buff,0,strlen(buff));
+    char buff1[]
+    // for(int i=0;i<126;i++){
+    //     x= MFS_Creat(x,1,itoa(i));
+    // }
+    // for(int i=0;i<126;i++){
+    //     x= MFS_Lookup(0, "testdir");
+    // }
+    x = MFS_Shutdown();
+    assert(x==0);
+    printf("Client Execution successful\n");
 
     // int x= MFS_Init("localhost", 10000);
     // assert(x==0);

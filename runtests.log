@@ -28,16 +28,23 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 8069
-/tmp/tmpleLThw/p/server 8069 /home/girish/p4/p4/test.img
-MFS Init2 localhost 8069
+Starting server on port 8565
+/tmp/tmpn3qqf2/p/server 8565 /home/girish/p4/p4/test.img
+server:: waiting...
+server:: read message [size:4164 contents:(1)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(8)]
+server:: reply
+Shutting down serverMFS Init2 localhost 8565
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
 client:: send message 8
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:8]
+client:: got reply [ rc:1 type:8]
+Server shutdown successful
 
 
 test shutdown PASSED
@@ -57,22 +64,41 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 6336
-/tmp/tmpleLThw/p/server 6336 /home/girish/p4/p4/test.img
-MFS Init2 localhost 6336
+Starting server on port 9863
+/tmp/tmpn3qqf2/p/server 9863 /home/girish/p4/p4/test.img
+server:: waiting...
+server:: read message [size:4164 contents:(1)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(6)]
+madda kuda 0
+freeInodeblockPos: 1
+freeDatablockPos: 1
+root inode type:: 0, size:: 96
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(8)]
+server:: reply
+Shutting down serverMFS Init2 localhost 9863
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
+MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 client:: send message 8
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:8]
+client:: got reply [ rc:1 type:8]
+Server shutdown successful
 
 
 test creat PASSED
@@ -92,28 +118,59 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 9442
-/tmp/tmpleLThw/p/server 9442 /home/girish/p4/p4/test.img
-MFS Init2 localhost 9442
+Starting server on port 8211
+/tmp/tmpn3qqf2/p/server 8211 /home/girish/p4/p4/test.img
+server:: waiting...
+server:: read message [size:4164 contents:(1)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(6)]
+madda kuda 0
+freeInodeblockPos: 1
+freeDatablockPos: 1
+root inode type:: 0, size:: 96
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(8)]
+server:: reply
+Shutting down serverMFS Init2 localhost 8211
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
+MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 client:: send message 4
 client:: wait for reply...
-client:: got reply [size:5068 rc:-1 type:4]
-Failure: MFS_Write returned failure inum=1 block=0
+client:: got reply [ rc:1 type:4]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+('START BLOCK 1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00', '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00END BLOCK 1')
+('START BLOCK 1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00', '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00END BLOCK 1')
+client:: send message 8
+client:: wait for reply...
+client:: got reply [ rc:1 type:8]
+Server shutdown successful
 
 
-test write FAILED
+test write PASSED
  (write then read one block)
- MFS_Write returned failure inum=1 block=0
 
 ('starting', 'stat')
 
@@ -129,36 +186,72 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 9681
-/tmp/tmpleLThw/p/server 9681 /home/girish/p4/p4/test.img
-MFS Init2 localhost 9681
+Starting server on port 9404
+/tmp/tmpn3qqf2/p/server 9404 /home/girish/p4/p4/test.img
+server:: waiting...
+server:: read message [size:4164 contents:(1)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(6)]
+madda kuda 0
+freeInodeblockPos: 1
+freeDatablockPos: 1
+root inode type:: 0, size:: 96
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(3)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(3)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(3)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(8)]
+server:: reply
+Shutting down serverMFS Init2 localhost 9404
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
+MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 client:: send message 3
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 client:: got MFS_Stat [size:96 type:0]
 client:: send message 3
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 client:: got MFS_Stat [size:0 type:1]
 client:: send message 4
 client:: wait for reply...
-client:: got reply [size:5068 rc:-1 type:4]
-Failure: MFS_Write returned failure inum=1 block=0
+client:: got reply [ rc:1 type:4]
+client:: send message 3
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: got MFS_Stat [size:4096 type:1]
+client:: send message 8
+client:: wait for reply...
+client:: got reply [ rc:1 type:8]
+Server shutdown successful
 
 
-test stat FAILED
+test stat PASSED
  (stat a regular file)
- MFS_Write returned failure inum=1 block=0
 
 ('starting', 'overwrite')
 
@@ -174,28 +267,69 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 9572
-/tmp/tmpleLThw/p/server 9572 /home/girish/p4/p4/test.img
-MFS Init2 localhost 9572
+Starting server on port 8506
+/tmp/tmpn3qqf2/p/server 8506 /home/girish/p4/p4/test.img
+server:: waiting...
+server:: read message [size:4164 contents:(1)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(6)]
+madda kuda 0
+freeInodeblockPos: 1
+freeDatablockPos: 1
+root inode type:: 0, size:: 96
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(8)]
+server:: reply
+Shutting down serverMFS Init2 localhost 8506
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
+MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 client:: send message 4
 client:: wait for reply...
-client:: got reply [size:5068 rc:-1 type:4]
-Failure: MFS_Write returned failure inum=1 block=0
+client:: got reply [ rc:1 type:4]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 8
+client:: wait for reply...
+client:: got reply [ rc:1 type:8]
+Server shutdown successful
 
 
-test overwrite FAILED
+test overwrite PASSED
  (overwrite a block)
- MFS_Write returned failure inum=1 block=0
 
 ('starting', 'maxfile')
 
@@ -211,28 +345,405 @@ total blocks        39
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 6544
-/tmp/tmpleLThw/p/server 6544 /home/girish/p4/p4/test.img
-MFS Init2 localhost 6544
+Starting server on port 8005
+/tmp/tmpn3qqf2/p/server 8005 /home/girish/p4/p4/test.img
+MFS Init2 localhost 8005
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
+MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 client:: send message 4
 client:: wait for reply...
-client:: got reply [size:5068 rc:-1 type:4]
-Failure: MFS_Write returned failure inum=1 block=0
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+clientserver:: waiting...
+server:: read message [size:4164 contents:(1)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(6)]
+madda kuda 0
+freeInodeblockPos: 1
+freeDatablockPos: 1
+root inode type:: 0, size:: 96
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(8)]
+server:: reply
+Shutting down server:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 8
+client:: wait for reply...
+client:: got reply [ rc:1 type:8]
+Server shutdown successful
 
 
-test maxfile FAILED
+test maxfile PASSED
  (write largest possible file)
- MFS_Write returned failure inum=1 block=0
 
 ('starting', 'maxfile2')
 
@@ -248,29 +759,422 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 7638
-/tmp/tmpleLThw/p/server 7638 /home/girish/p4/p4/test.img
-MFS Init2 localhost 7638
+Starting server on port 8267
+/tmp/tmpn3qqf2/p/server 8267 /home/girish/p4/p4/test.img
+MFS Init2 localhost 8267
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
+MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 31
 client:: send message 4
 client:: wait for reply...
-client:: got reply [size:5068 rc:-1 type:4]
-Failure: MFS_Write returned failure inum=1 block=0
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+write more than need
+client:: send message 4
+client:: wait for reply...
+client:: got reply [ rc:-4 type:4]
+Retrying MFS_Write1
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: senserver:: waiting...
+server:: read message [size:4164 contents:(1)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(6)]
+madda kuda 0
+freeInodeblockPos: 1
+freeDatablockPos: 1
+root inode type:: 0, size:: 96
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+Hi in maxfilesize check
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(8)]
+server:: reply
+Shutting down serverd message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:-3 type:5]
+Retrying  MFS_Read1
+client:: send message 8
+client:: wait for reply...
+client:: got reply [ rc:1 type:8]
+Server shutdown successful
 
 
-test maxfile2 FAILED
+test maxfile2 PASSED
  (write more blocks than possible)
- MFS_Write returned failure inum=1 block=0
 
 ('starting', 'dir1')
 
@@ -286,22 +1190,37 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 9243
-/tmp/tmpleLThw/p/server 9243 /home/girish/p4/p4/test.img
-MFS Init2 localhost 9243
+Starting server on port 8795
+/tmp/tmpn3qqf2/p/server 8795 /home/girish/p4/p4/test.img
+server:: waiting...
+server:: read message [size:4164 contents:(1)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---64 0 .:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---64 0 ..:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(8)]
+server:: reply
+Shutting down serverMFS Init2 localhost 8795
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 client:: send message 8
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:8]
+client:: got reply [ rc:1 type:8]
+Server shutdown successful
 
 
 test dir1 PASSED
@@ -321,28 +1240,60 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 8506
-/tmp/tmpleLThw/p/server 8506 /home/girish/p4/p4/test.img
-MFS Init2 localhost 8506
+Starting server on port 7109
+/tmp/tmpn3qqf2/p/server 7109 /home/girish/p4/p4/test.img
+server:: waiting...
+server:: read message [size:4164 contents:(1)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(6)]
+madda kuda 0
+freeInodeblockPos: 1
+freeDatablockPos: 1
+inode type:: 0, size:: 64
+root inode type:: 0, size:: 96
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 testdir:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---64 0 .:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---64 0 ..:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(8)]
+server:: reply
+Shutting down serverMFS Init2 localhost 7109
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
+MFS_Creat pinum :: 0 path:: testdir type:: 0 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:-1 type:2]
-Failure: MFS_Lookup returned failure inum=1 name='.'
+client:: got reply [ rc:1 type:0]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [ rc:1 type:0]
+client:: send message 8
+client:: wait for reply...
+client:: got reply [ rc:1 type:8]
+Server shutdown successful
 
 
-test dir2 FAILED
+test dir2 PASSED
  (create a new directory and check it)
- MFS_Lookup returned failure inum=1 name='.'
 
 ('starting', 'baddir')
 
@@ -358,25 +1309,49 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 5891
-/tmp/tmpleLThw/p/server 5891 /home/girish/p4/p4/test.img
-MFS Init2 localhost 5891
+Starting server on port 7792
+/tmp/tmpn3qqf2/p/server 7792 /home/girish/p4/p4/test.img
+server:: waiting...
+server:: read message [size:4164 contents:(1)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(6)]
+madda kuda 0
+freeInodeblockPos: 1
+freeDatablockPos: 1
+root inode type:: 0, size:: 96
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 testdir:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(6)]
+madda kuda 1
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(8)]
+server:: reply
+Shutting down serverMFS Init2 localhost 7792
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
+MFS_Creat pinum :: 0 path:: testdir type:: 1 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
+MFS_Creat pinum :: 1 path:: testfile type:: 1 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:-1 type:2]
+client:: got reply [ rc:-1 type:6]
 client:: send message 8
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:8]
+client:: got reply [ rc:1 type:8]
+Server shutdown successful
 
 
 test baddir PASSED
@@ -396,25 +1371,48 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 8821
-/tmp/tmpleLThw/p/server 8821 /home/girish/p4/p4/test.img
-MFS Init2 localhost 8821
+Starting server on port 6836
+/tmp/tmpn3qqf2/p/server 6836 /home/girish/p4/p4/test.img
+server:: waiting...
+server:: read message [size:4164 contents:(1)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(6)]
+madda kuda 0
+freeInodeblockPos: 1
+freeDatablockPos: 1
+root inode type:: 0, size:: 96
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 testdir:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in the file lookup
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(8)]
+server:: reply
+Shutting down serverMFS Init2 localhost 6836
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
+MFS_Creat pinum :: 0 path:: testdir type:: 1 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:-1 type:2]
+client:: got reply [ rc:-1 type:2]
 client:: send message 8
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:8]
+client:: got reply [ rc:1 type:8]
+Server shutdown successful
 
 
 test baddir2 PASSED
@@ -434,22 +1432,23 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 8794
-/tmp/tmpleLThw/p/server 8794 /home/girish/p4/p4/test.img
-MFS Init2 localhost 8794
+Starting server on port 5585
+/tmp/tmpn3qqf2/p/server 5585 /home/girish/p4/p4/test.img
+MFS Init2 localhost 5585
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
+MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 Failure: MFS_Lookup should fail on an unlinked file
 
 
@@ -471,22 +1470,23 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 8630
-/tmp/tmpleLThw/p/server 8630 /home/girish/p4/p4/test.img
-MFS Init2 localhost 8630
+Starting server on port 5456
+/tmp/tmpn3qqf2/p/server 5456 /home/girish/p4/p4/test.img
+MFS Init2 localhost 5456
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
+MFS_Creat pinum :: 0 path:: test type:: 0 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 Failure: MFS_Lookup should fail on an unlinked file
 
 
@@ -508,22 +1508,24 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 8472
-/tmp/tmpleLThw/p/server 8472 /home/girish/p4/p4/test.img
-MFS Init2 localhost 8472
+Starting server on port 6828
+/tmp/tmpn3qqf2/p/server 6828 /home/girish/p4/p4/test.img
+MFS Init2 localhost 6828
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
+MFS_Creat pinum :: 0 path:: testdir type:: 0 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
+MFS_Creat pinum :: 1 path:: testfile type:: 1 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:-1 type:2]
+client:: got reply [ rc:1 type:0]
 Failure: MFS_Creat returned failure inum=1 type=1 name='testfile'
 
 
@@ -545,16 +1547,23 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 8513
-/tmp/tmpleLThw/p/server 8513 /home/girish/p4/p4/test.img
-MFS Init2 localhost 8513
+Starting server on port 8390
+/tmp/tmpn3qqf2/p/server 8390 /home/girish/p4/p4/test.img
+server:: waiting...
+server:: read message [size:4164 contents:(1)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(8)]
+server:: reply
+Shutting down serverMFS Init2 localhost 8390
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
 client:: send message 8
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:8]
+client:: got reply [ rc:1 type:8]
+Server shutdown successful
 
 
 test name PASSED
@@ -574,28 +1583,68 @@ total blocks        36
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 8378
-/tmp/tmpleLThw/p/server 8378 /home/girish/p4/p4/test.img
-MFS Init2 localhost 8378
+Starting server on port 7273
+/tmp/tmpn3qqf2/p/server 7273 /home/girish/p4/p4/test.img
+server:: waiting...
+server:: read message [size:4164 contents:(1)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(6)]
+madda kuda 0
+freeInodeblockPos: 1
+freeDatablockPos: 1
+root inode type:: 0, size:: 96
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(4)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(2)]
+Hi in lookup server ---96 0 test:
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(5)]
+server:: reply
+server:: waiting...
+server:: read message [size:4164 contents:(8)]
+server:: reply
+Shutting down serverMFS Init2 localhost 7273
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
+MFS_Creat pinum :: 0 path:: test type:: 1 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
 client:: send message 4
 client:: wait for reply...
-client:: got reply [size:5068 rc:-1 type:4]
-Failure: MFS_Write returned failure inum=1 block=0
+client:: got reply [ rc:1 type:4]
+client:: send message 2
+client:: wait for reply...
+client:: got reply [ rc:1 type:4]
+client:: send message 5
+client:: wait for reply...
+client:: got reply [ rc:1 type:5]
+client:: send message 8
+client:: wait for reply...
+client:: got reply [ rc:1 type:8]
+Server shutdown successful
+MFS Init2 localhost 7273
+client:: send message 1
+client:: failed to send
 
 
 test persist FAILED
  (restart server after creating a file)
- MFS_Write returned failure inum=1 block=0
+ Timelimit (30.0s) exceeded
 
 ('starting', 'bigdir')
 
@@ -611,22 +1660,24 @@ total blocks        39
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 5644
-/tmp/tmpleLThw/p/server 5644 /home/girish/p4/p4/test.img
-MFS Init2 localhost 5644
+Starting server on port 8918
+/tmp/tmpn3qqf2/p/server 8918 /home/girish/p4/p4/test.img
+MFS Init2 localhost 8918
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
+MFS_Creat pinum :: 0 path:: testdir type:: 0 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
+MFS_Creat pinum :: 1 path:: 0 type:: 1 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:-1 type:2]
+client:: got reply [ rc:1 type:0]
 Failure: MFS_Creat returned failure inum=1 type=1 name='0'
 
 
@@ -648,22 +1699,24 @@ total blocks        39
 layout details
   inode bitmap address/len 1 [1]
   data bitmap address/len  2 [1]
-Starting server on port 9213
-/tmp/tmpleLThw/p/server 9213 /home/girish/p4/p4/test.img
-MFS Init2 localhost 9213
+Starting server on port 7635
+/tmp/tmpn3qqf2/p/server 7635 /home/girish/p4/p4/test.img
+MFS Init2 localhost 7635
 client:: send message 1
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 Conncetion was established with Server & rootInodeNum is : 0
+MFS_Creat pinum :: 0 path:: testdir type:: 0 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:0 type:0]
+client:: got reply [ rc:0 type:0]
 client:: send message 2
 client:: wait for reply...
-client:: got reply [size:5068 rc:1 type:0]
+client:: got reply [ rc:1 type:0]
+MFS_Creat pinum :: 1 path:: 0 type:: 0 
 client:: send message 6
 client:: wait for reply...
-client:: got reply [size:5068 rc:-1 type:2]
+client:: got reply [ rc:1 type:0]
 Failure: MFS_Creat returned failure inum=1 type=0 name='0'
 
 
@@ -682,32 +1735,26 @@ test shutdown PASSED
 test creat PASSED
  (creat a file and check with lookup)
 
-test write FAILED
+test write PASSED
  (write then read one block)
- MFS_Write returned failure inum=1 block=0
 
-test stat FAILED
+test stat PASSED
  (stat a regular file)
- MFS_Write returned failure inum=1 block=0
 
-test overwrite FAILED
+test overwrite PASSED
  (overwrite a block)
- MFS_Write returned failure inum=1 block=0
 
-test maxfile FAILED
+test maxfile PASSED
  (write largest possible file)
- MFS_Write returned failure inum=1 block=0
 
-test maxfile2 FAILED
+test maxfile2 PASSED
  (write more blocks than possible)
- MFS_Write returned failure inum=1 block=0
 
 test dir1 PASSED
  (check root for dot entries)
 
-test dir2 FAILED
+test dir2 PASSED
  (create a new directory and check it)
- MFS_Lookup returned failure inum=1 name='.'
 
 test baddir PASSED
  (try to create a file with a file parent inode)
@@ -732,7 +1779,7 @@ test name PASSED
 
 test persist FAILED
  (restart server after creating a file)
- MFS_Write returned failure inum=1 block=0
+ Timelimit (30.0s) exceeded
 
 test bigdir FAILED
  (create a directory with 126 files)
@@ -742,5 +1789,5 @@ test deep FAILED
  (create many deeply nested directories)
  MFS_Creat returned failure inum=1 type=0 name='0'
 
-Passed 7 of 19 tests.
-Overall 7 of 19
+Passed 13 of 19 tests.
+Overall 13 of 19
