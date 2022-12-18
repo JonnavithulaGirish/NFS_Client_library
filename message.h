@@ -20,7 +20,7 @@ typedef struct {
     int inodeNum;
     char path[128];
     MFS_Stat_t fStats;
-    char *buffer;
+    char buffer[5000];
     int offset;
     int nbytes;
     int fileType;

@@ -14,6 +14,7 @@
 message_t FileSystemUpdate(message_t m);
 int getPosition(unsigned int n);
 int  lookupHelperFun(inode_t inode,super_t *s,message_t m);
+bool checkValidWrite(message_t m,super_t *s);
 
 // server code
 int main(int argc, char *argv[]) {
@@ -160,10 +161,111 @@ message_t FileSystemUpdate(message_t m){
 			
 		}	
 	}else if(m.mtype == MFS_WRITE){
-		if(m.inodeNum<0 || m.inodeNum>= (s->inode_region_len*(UFS_BLOCK_SIZE))/sizeof(inode_t)){
-			res_m.mtype= MFS_LOOKUP;
+		bitmap_t  *data_bitmap= image+ (s->data_bitmap_addr * UFS_BLOCK_SIZE);
+		if(!checkValidWrite(m,s)){
+			res_m.mtype= MFS_WRITE;
 			res_m.rc = -1;
 		}else{
+			inode_t* inode = &inode_table[m.inodeNum];
+			if(inode->type == 1){
+				res_m.mtype= MFS_WRITE;
+				res_m.rc = -1;
+			}else if(m.offset<0 || m.offset>inode->size){
+				res_m.mtype= MFS_WRITE;
+				res_m.rc = -1;
+			}else{
+				int r = m.offset/UFS_BLOCK_SIZE;
+				int c = m.offset%UFS_BLOCK_SIZE;	
+				int extra = m.offset+m.nbytes - inode->size;
+				extra = extra>0?extra:0;
+				char* datablock = (char*) image + inode->direct[r]*UFS_BLOCK_SIZE;
+				int i = m.offset;
+				int n_bytes = m.nbytes;
+				//update the size of the inode;
+				inode->size = inode->size+extra;
+				int count = 0;
+				while(i<4096 && n_bytes>0){
+					//need to check how to update the bytes;
+					datablock[i] = m.buffer[i-m.offset];
+					count++;
+					i++;
+					n_bytes--;
+				}
+				if(n_bytes != 0){
+					//need to get a new data block from the data bit map and update the data bit map.
+					int freeDatablockPos=0;
+					for(int j=0; j< 1024* s->data_bitmap_len; j++){
+						unsigned int temp = data_bitmap->bits[j]&(data_bitmap->bits[j]+1);
+						if(temp != 0){
+							int position = getPosition(data_bitmap->bits[j]);
+							unsigned int bitMask = 1 << position;
+							data_bitmap->bits[j] |= bitMask;
+							freeDatablockPos+=(32-position);
+							break;
+						}
+						freeDatablockPos += 32;
+					}
+					freeDatablockPos-=1;
+					//need to update a data block for the inode.(r+1)
+					inode->direct[r+1]= s->data_region_addr+(freeDatablockPos);
+
+					int i=0;
+					datablock = (char*) image + inode->direct[r+1]*UFS_BLOCK_SIZE;
+					//need to update the remaining bytes to the new data block.
+					while(i<4096 && n_bytes>0){
+						//need to check how to update the bytes;
+						datablock[i] = m.buffer[i+count];
+						i++;
+						n_bytes--;
+					}
+				}
+				res_m.rc = 1;
+				
+			}
+
+		}
+	}else if(m.mtype == MFS_READ){
+		bitmap_t  *data_bitmap= image+ (s->data_bitmap_addr * UFS_BLOCK_SIZE);
+		if(!checkValidWrite(m,s)){
+			res_m.mtype= MFS_READ;
+			res_m.rc = -1;
+		}else{
+			inode_t* inode = &inode_table[m.inodeNum];
+			if(m.offset<0 || m.offset+m.nbytes<inode->size){
+				res_m.mtype= MFS_READ;
+				res_m.rc = -1;
+			}else{
+				int r = m.offset/UFS_BLOCK_SIZE;
+				int c = m.offset%UFS_BLOCK_SIZE;	
+				// char* datablock = (char*) image+ s->data_region_addr+ inode->direct[r]*UFS_BLOCK_SIZE;
+				char* datablock = (char*) image + inode->direct[r]*UFS_BLOCK_SIZE;
+				int i = m.offset;
+				int n_bytes = m.nbytes;
+				int count = 0;
+				while(i<4096 && n_bytes>0){
+					//need to check how to update the bytes;
+					// datablock[i] = m.buffer[i-m.offset];
+					m.buffer[i-m.offset] = datablock[i];
+					i++;
+					count++;
+					n_bytes--;
+				}
+				if(n_bytes != 0){
+					int i=0;
+					datablock = (char*) image + inode->direct[r+1]*UFS_BLOCK_SIZE;
+
+					//need to update the remaining bytes to the new data block.
+					while(i<4096 && n_bytes>0){
+						//need to check how to update the bytes;
+						// datablock[i] = m.buffer[i];
+						res_m.buffer[i+count] = datablock[i];
+						i++;
+						n_bytes--;
+					}
+				}
+				res_m.rc = 1;
+				
+			}
 
 		}
 	}else if(m.mtype == MFS_SHUTDOWN){
@@ -231,6 +333,17 @@ int  lookupHelperFun(inode_t inode,super_t *s,message_t m){
 	}
 
 	return -1;
+}
+
+bool checkValidWrite(message_t m,super_t *s){
+	if(m.inodeNum<0 
+		|| m.inodeNum>= (s->inode_region_len*(UFS_BLOCK_SIZE))/sizeof(inode_t)
+		|| m.nbytes >4096
+		){
+			return false;
+
+		}
+	return true;
 }
 
 

@@ -116,6 +116,30 @@ int MFS_Stat(int inum, MFS_Stat_t *m) {
 }
 
 int MFS_Write(int inum, char *buffer, int offset, int nbytes) {
+     // network communication to do the lookup to server
+    if(connectionEstablished){
+        message_t m,res_m;
+        m.mtype = MFS_WRITE;
+        m.inodeNum = inum;
+        m.nbytes = nbytes;
+        m.offset = offset;
+        strcpy(m.buffer,buffer);
+        while(true){
+            res_m= sendMessageToServer(m);
+            if(!res_m.retry)
+                break;
+            else{
+                printf("Retrying MFS_Creat\n");
+            }
+        }
+        if(res_m.rc == -1){
+            return -1;
+        }
+        return 0;
+    }
+    else{
+        return -1;
+    }
     return 0;
 }
 
