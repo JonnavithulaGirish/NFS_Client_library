@@ -66,6 +66,27 @@ int MFS_Init(char *hostname, int port) {
 
 int MFS_Lookup(int pinum, char *name) {
     // network communication to do the lookup to server
+    if(connectionEstablished){
+        message_t m,res_m;
+        m.mtype = MFS_LOOKUP;
+        m.inodeNum = pinum;
+        strcpy(m.path, name);
+        while(true){
+            res_m= sendMessageToServer(m);
+            if(!res_m.retry)
+                break;
+            else{
+                printf("Retrying MFS_Creat\n");
+            }
+        }
+        if(res_m.rc == -1){
+            return -1;
+        }
+        return res_m.inodeNum;
+    }
+    else{
+        return -1;
+    }
     return 0;
 }
 

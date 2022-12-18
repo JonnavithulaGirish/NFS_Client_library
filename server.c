@@ -13,6 +13,7 @@
 
 message_t FileSystemUpdate(message_t m);
 int getPosition(unsigned int n);
+int lookupHelperFun(inode_t inode,super_t *s,message_t m, void* image);
 
 // server code
 int main(int argc, char *argv[]) {
@@ -80,8 +81,8 @@ message_t FileSystemUpdate(message_t m){
 		printf("freeInodeblockPos: %d\n", freeInodeblockPos);
 
 		//Update Inode with data
-		inode_t new_inode = inode_table[freeInodeblockPos];
-		new_inode.type = m.fileType;
+		inode_t *new_inode = &inode_table[freeInodeblockPos];
+		new_inode->type = m.fileType;
 
 		// //Find free Data node position
 		int freeDatablockPos=0;
@@ -103,31 +104,33 @@ message_t FileSystemUpdate(message_t m){
 		}
 		freeDatablockPos-=1;
 		printf("freeDatablockPos: %d\n", freeDatablockPos);
-		new_inode.direct[0]= s->data_region_addr + freeDatablockPos;
+		new_inode->direct[0]= s->data_region_addr + freeDatablockPos;
 
 
 		//update data of parentDir
-		inode_t parent_dir_inode = inode_table[m.inodeNum];
-		int directDatablock = parent_dir_inode.size/UFS_BLOCK_SIZE;
-		int directDatablockIndex = (parent_dir_inode.size % UFS_BLOCK_SIZE )/sizeof(dir_ent_t);
+		inode_t* parent_dir_inode = &inode_table[m.inodeNum];
+		int directDatablock = parent_dir_inode->size/UFS_BLOCK_SIZE;
+		int directDatablockIndex = (parent_dir_inode->size % UFS_BLOCK_SIZE )/sizeof(dir_ent_t);
 		
 		//if type is directory/file update inode and data for parent
-		parent_dir_inode.size += sizeof(dir_ent_t);
-		dir_block_t* parent_dir_data_block = image + (parent_dir_inode.direct[directDatablock] * UFS_BLOCK_SIZE);
+		parent_dir_inode->size += sizeof(dir_ent_t);
+		printf("update parent direct size: %d/n",parent_dir_inode->size);
+		dir_block_t* parent_dir_data_block = image + (parent_dir_inode->direct[directDatablock] * UFS_BLOCK_SIZE);
 		parent_dir_data_block->dirEntries[directDatablockIndex].inum= freeInodeblockPos;
 		strcpy(parent_dir_data_block->dirEntries[directDatablockIndex].name,  m.path);
 
+		printf("file type:  %d\n", m.fileType);
 		if(m.fileType == UFS_DIRECTORY){
 			//if type is directory update data new data block
-			new_inode.size = 2* sizeof(dir_ent_t);
-			dir_block_t * new_dir_data_block = image + (new_inode.direct[0] * UFS_BLOCK_SIZE);
+			new_inode->size = 2* sizeof(dir_ent_t);
+			dir_block_t * new_dir_data_block = image + (new_inode->direct[0] * UFS_BLOCK_SIZE);
 			new_dir_data_block->dirEntries[0].inum= freeInodeblockPos;
 			strcpy(new_dir_data_block->dirEntries[0].name,  "." );
 			new_dir_data_block->dirEntries[1].inum= m.inodeNum;
 			strcpy(new_dir_data_block->dirEntries[1].name,  "..");
-			printf("root inode type:: %d, size:: %d ", inode_table[m.inodeNum].type , inode_table[m.inodeNum].size);
-			printf("inode type:: %d, size:: %d ", new_inode.type, new_inode.size);
+			printf("inode type:: %d, size:: %d\n", new_inode->type, new_inode->size);
 		}
+		printf("root inode type:: %d, size:: %d\n", inode_table[m.inodeNum].type , inode_table[m.inodeNum].size);
 		rc = fsync(fd);
     	assert(rc > -1);
 	}
@@ -136,6 +139,45 @@ message_t FileSystemUpdate(message_t m){
 		res_m.rc =1;
 		rc = fsync(fd);
     	assert(rc > -1);
+	}
+	else if(m.mtype== MFS_LOOKUP){
+
+		if(m.inodeNum<0 || m.inodeNum>= (s->inode_region_len*(UFS_BLOCK_SIZE))/sizeof(inode_t)){
+			res_m.mtype= MFS_LOOKUP;
+			res_m.rc = -1;
+		}else{
+			inode_t inode = inode_table[m.inodeNum];
+			printf("Hi in the lookup -------- %d,%d",inode.type,inode.size);
+			if(inode.type == 1){
+				res_m.mtype= MFS_LOOKUP;
+				res_m.rc = -1;
+			}else{
+				char * token = strtok(m.path,"/");
+				while(token != NULL){
+					message_t tempMsg = m;
+					strcpy(tempMsg.path,token);
+					int new_inodeNum = lookupHelperFun(inode,s,tempMsg,image);
+					if(new_inodeNum == -1){
+						res_m.inodeNum = -1;
+						res_m.rc = -1;
+						break;
+					}
+					res_m.inodeNum = new_inodeNum;
+					res_m.rc = 1;
+					inode = inode_table[new_inodeNum];
+					token = strtok(NULL, " ");
+				}
+				
+			}
+			
+		}	
+	}else if(m.mtype == MFS_WRITE){
+		if(m.inodeNum<0 || m.inodeNum>= (s->inode_region_len*(UFS_BLOCK_SIZE))/sizeof(inode_t)){
+			res_m.mtype= MFS_LOOKUP;
+			res_m.rc = -1;
+		}else{
+
+		}
 	}
 	else if(m.mtype == MFS_STAT){
 		inode_t *inode_table = image + (s->inode_region_addr * UFS_BLOCK_SIZE) + (m.inodeNum*sizeof(inode_t));
@@ -162,5 +204,36 @@ int getPosition(unsigned int n){
 	return pos;
 }
 
+int lookupHelperFun(inode_t inode,super_t *s,message_t m, void* image){
+	int datablocks = 0;
+	// printf("node : %d\n",inode.);
+	if(inode.size %UFS_BLOCK_SIZE ==0){
+		datablocks = inode.size/UFS_BLOCK_SIZE;
+	}else{
+		datablocks = 1 + inode.size/UFS_BLOCK_SIZE;
+	}
+	for(int i=0;i<datablocks;i++){
+		dir_ent_t* dataBlock  = (dir_ent_t*)( image + (inode.direct[i] * UFS_BLOCK_SIZE));
+		if(i!=datablocks-1){
+			int maxDirEntries = UFS_BLOCK_SIZE/sizeof(dir_ent_t);
+			for(int j=0;j<maxDirEntries;j++){
+				dir_ent_t resInode = dataBlock[j];
+				if(strcmp(resInode.name,m.path) == 0){
+					return resInode.inum;
+				}
+			}
+		}else{
+			int x = inode.size %UFS_BLOCK_SIZE;
+			int maxDirEntries = x/sizeof(dir_ent_t);
+			for(int j=0;j<maxDirEntries;j++){
+				dir_ent_t resInode = dataBlock[j];
+				if(strcmp(resInode.name,m.path) == 0){
+					return resInode.inum;
+				}
+			}
 
+		}
+	}
 
+	return -1;
+}
